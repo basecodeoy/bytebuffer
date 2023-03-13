@@ -7,7 +7,7 @@ namespace Tests\Concerns\Reads;
 use PHPUnit\Framework\TestCase;
 use PreemStudio\ByteBuffer\ByteBuffer;
 
-class UnsignedIntegerTest extends TestCase
+final class UnsignedIntegerTest extends TestCase
 {
     /** @test */
     public function it_should_read_uint8()

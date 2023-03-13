@@ -6,7 +6,7 @@ namespace PreemStudio\ByteBuffer;
 
 use InvalidArgumentException;
 
-class LengthMap
+final class LengthMap
 {
     /**
      * Available formats and the bit size required to store them.

@@ -7,7 +7,7 @@ namespace Tests\Concerns\Reads;
 use PHPUnit\Framework\TestCase;
 use PreemStudio\ByteBuffer\ByteBuffer;
 
-class PositionableTest extends TestCase
+final class PositionableTest extends TestCase
 {
     /** @test */
     public function it_should_current_the_offset()

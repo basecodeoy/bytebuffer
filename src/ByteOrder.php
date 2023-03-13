@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PreemStudio\ByteBuffer;
 
-class ByteOrder
+final class ByteOrder
 {
     /**
      * Most significant value in the sequence is stored first. Flip no bytes!

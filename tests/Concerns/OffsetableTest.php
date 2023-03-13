@@ -7,7 +7,7 @@ namespace Tests\Concerns\Reads;
 use PHPUnit\Framework\TestCase;
 use PreemStudio\ByteBuffer\ByteBuffer;
 
-class OffsetableTest extends TestCase
+final class OffsetableTest extends TestCase
 {
     /** @test */
     public function it_should_get_the_value_at_the_given_offset()

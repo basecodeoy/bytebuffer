@@ -7,7 +7,7 @@ namespace Tests\Concerns\Reads;
 use PHPUnit\Framework\TestCase;
 use PreemStudio\ByteBuffer\ByteBuffer;
 
-class FloatsTest extends TestCase
+final class FloatsTest extends TestCase
 {
     /** @test */
     public function it_should_read_float32()

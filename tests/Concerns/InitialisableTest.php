@@ -7,7 +7,7 @@ namespace Tests\Concerns\Reads;
 use PHPUnit\Framework\TestCase;
 use PreemStudio\ByteBuffer\ByteBuffer;
 
-class InitialisableTest extends TestCase
+final class InitialisableTest extends TestCase
 {
     private $expected = '48656c6c6f20576f726c6420f09f9884';
 

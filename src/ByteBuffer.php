@@ -6,7 +6,7 @@ namespace PreemStudio\ByteBuffer;
 
 use InvalidArgumentException;
 
-class ByteBuffer
+final class ByteBuffer
 {
     use Concerns\Initialisable,
         Concerns\Offsetable,

@@ -7,7 +7,7 @@ namespace Tests\Concerns\Writes;
 use PHPUnit\Framework\TestCase;
 use PreemStudio\ByteBuffer\ByteBuffer;
 
-class HexTest extends TestCase
+final class HexTest extends TestCase
 {
     /** @test */
     public function it_should_write_hex()

@@ -7,7 +7,7 @@ namespace Tests\Concerns\Writes;
 use PHPUnit\Framework\TestCase;
 use PreemStudio\ByteBuffer\ByteBuffer;
 
-class StringsTest extends TestCase
+final class StringsTest extends TestCase
 {
     /** @test */
     public function it_should_write_bytes()

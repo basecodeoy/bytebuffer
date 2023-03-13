@@ -7,7 +7,7 @@ namespace Tests\Concerns\Writes;
 use PHPUnit\Framework\TestCase;
 use PreemStudio\ByteBuffer\ByteBuffer;
 
-class IntegerTest extends TestCase
+final class IntegerTest extends TestCase
 {
     /** @test */
     public function it_should_write_int8()

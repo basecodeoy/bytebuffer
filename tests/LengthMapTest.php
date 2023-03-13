@@ -7,7 +7,7 @@ namespace Tests;
 use PHPUnit\Framework\TestCase;
 use PreemStudio\ByteBuffer\LengthMap;
 
-class LengthMapTest extends TestCase
+final class LengthMapTest extends TestCase
 {
     /** @test */
     public function it_should_get_the_length_for_string()

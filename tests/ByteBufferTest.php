@@ -7,7 +7,7 @@ namespace Tests;
 use PHPUnit\Framework\TestCase;
 use PreemStudio\ByteBuffer\ByteBuffer;
 
-class ByteBufferTest extends TestCase
+final class ByteBufferTest extends TestCase
 {
     /** @test */
     public function it_should_get_the_value_at_the_given_offset()
