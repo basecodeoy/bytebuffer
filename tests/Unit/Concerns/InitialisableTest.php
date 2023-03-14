@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tests\Concerns\Reads;
+namespace Tests\Unit\Concerns\Reads;
 
 use PHPUnit\Framework\TestCase;
 use PreemStudio\ByteBuffer\ByteBuffer;
