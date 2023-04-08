@@ -7,46 +7,44 @@ namespace Tests\Unit;
 use PHPUnit\Framework\TestCase;
 use PreemStudio\ByteBuffer\LengthMap;
 
+/**
+ * @internal
+ *
+ * @coversNothing
+ */
 final class LengthMapTest extends TestCase
 {
-    /** @test */
-    public function it_should_get_the_length_for_string()
+    public function test_it_should_get_the_length_for_string(): void
     {
-        $this->assertSame(33, LengthMap::get('a33'));
+        self::assertSame(33, LengthMap::get('a33'));
     }
 
-    /** @test */
-    public function it_should_get_the_length_for_float()
+    public function test_it_should_get_the_length_for_float(): void
     {
-        $this->assertSame(33, LengthMap::get('f33'));
+        self::assertSame(33, LengthMap::get('f33'));
     }
 
-    /** @test */
-    public function it_should_get_the_length_for_double()
+    public function test_it_should_get_the_length_for_double(): void
     {
-        $this->assertSame(33, LengthMap::get('d33'));
+        self::assertSame(33, LengthMap::get('d33'));
     }
 
-    /** @test */
-    public function it_should_get_the_length_for_hex_with_low_nibble()
+    public function test_it_should_get_the_length_for_hex_with_low_nibble(): void
     {
-        $this->assertSame(33, LengthMap::get('h66'));
+        self::assertSame(33, LengthMap::get('h66'));
     }
 
-    /** @test */
-    public function it_should_get_the_length_for_hex_with_high_nibble()
+    public function test_it_should_get_the_length_for_hex_with_high_nibble(): void
     {
-        $this->assertSame(33, LengthMap::get('H66'));
+        self::assertSame(33, LengthMap::get('H66'));
     }
 
-    /** @test */
-    public function it_should_get_the_length_from_the_array()
+    public function test_it_should_get_the_length_from_the_array(): void
     {
-        $this->assertSame(1, LengthMap::get('C'));
+        self::assertSame(1, LengthMap::get('C'));
     }
 
-    /** @test */
-    public function it_should_throw_for_invalid_type()
+    public function test_it_should_throw_for_invalid_type(): void
     {
         $this->expectException(\InvalidArgumentException::class);
 

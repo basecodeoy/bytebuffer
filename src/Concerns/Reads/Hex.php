@@ -19,6 +19,6 @@ trait Hex
      */
     public function readHexString(int $length): string
     {
-        return pack('H*', $this->readHex($length));
+        return \pack('H*', $this->readHex($length));
     }
 }

@@ -60,7 +60,7 @@ trait Positionable
     public function clear(): self
     {
         $this->offset = 0;
-        $this->length = count($this->buffer);
+        $this->length = \count($this->buffer);
 
         return $this;
     }

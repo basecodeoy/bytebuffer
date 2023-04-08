@@ -16,6 +16,8 @@ trait Offsetable
 
     /**
      * Set the value at the given offset.
+     *
+     * @param mixed $value
      */
     public function offsetSet(int $offset, $value): void
     {

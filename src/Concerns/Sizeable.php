@@ -19,7 +19,7 @@ trait Sizeable
      */
     public function internalSize(): int
     {
-        return count($this->buffer);
+        return \count($this->buffer);
     }
 
     /**
@@ -43,9 +43,9 @@ trait Sizeable
     {
         $current = $this->buffer;
 
-        $this->initializeBuffer($capacity, pack("x{$capacity}"));
+        $this->initializeBuffer($capacity, \pack("x{$capacity}"));
 
-        $this->buffer = array_replace($this->buffer, $current);
+        $this->buffer = \array_replace($this->buffer, $current);
 
         return $this;
     }

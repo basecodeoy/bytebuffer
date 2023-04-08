@@ -6,9 +6,9 @@ namespace PreemStudio\ByteBuffer\Concerns;
 
 trait Writeable
 {
-    use Writes\Floats,
-        Writes\Hex,
-        Writes\Integer,
-        Writes\Strings,
-        Writes\UnsignedInteger;
+    use Writes\Floats;
+    use Writes\Hex;
+    use Writes\Integer;
+    use Writes\Strings;
+    use Writes\UnsignedInteger;
 }

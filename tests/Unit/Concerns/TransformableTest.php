@@ -7,106 +7,98 @@ namespace Tests\Unit\Concerns\Reads;
 use PHPUnit\Framework\TestCase;
 use PreemStudio\ByteBuffer\ByteBuffer;
 
+/**
+ * @internal
+ *
+ * @coversNothing
+ */
 final class TransformableTest extends TestCase
 {
-    /** @test */
-    public function it_should_transform_to_binary()
+    public function test_it_should_transform_to_binary(): void
     {
         $buffer = ByteBuffer::new('Hello World 😄');
 
-        $this->assertSame('Hello World 😄', $buffer->toBinary());
+        self::assertSame('Hello World 😄', $buffer->toBinary());
     }
 
-    /** @test */
-    public function it_should_transform_to_hex()
+    public function test_it_should_transform_to_hex(): void
     {
         $buffer = ByteBuffer::new('Hello World 😄');
 
-        $this->assertSame('48656c6c6f20576f726c6420f09f9884', $buffer->toHex());
+        self::assertSame('48656c6c6f20576f726c6420f09f9884', $buffer->toHex());
     }
 
-    /** @test */
-    public function it_should_transform_to_utf8()
+    public function test_it_should_transform_to_utf8(): void
     {
         $buffer = ByteBuffer::new('Hello World 😄');
 
-        $this->assertSame('Hello World 😄', $buffer->toUTF8());
+        self::assertSame('Hello World 😄', $buffer->toUTF8());
     }
 
-    /** @test */
-    public function it_should_transform_to_base64()
+    public function test_it_should_transform_to_base64(): void
     {
         $buffer = ByteBuffer::new('Hello World 😄');
 
-        $this->assertSame('SGVsbG8gV29ybGQg8J+YhA==', $buffer->toBase64());
+        self::assertSame('SGVsbG8gV29ybGQg8J+YhA==', $buffer->toBase64());
     }
 
-    /** @test */
-    public function it_should_transform_to_array()
+    public function test_it_should_transform_to_array(): void
     {
         $buffer = ByteBuffer::new('Hello World 😄');
 
-        $this->assertSame(str_split('Hello World 😄'), $buffer->toArray());
+        self::assertSame(\mb_str_split('Hello World 😄'), $buffer->toArray());
     }
 
-    /** @test */
-    public function it_should_transform_to_gmp()
+    public function test_it_should_transform_to_gmp(): void
     {
         $buffer = ByteBuffer::new('Hello World 😄');
 
-        $this->assertInstanceOf(\GMP::class, $buffer->toGmp());
+        self::assertInstanceOf(\GMP::class, $buffer->toGmp());
     }
 
-    /** @test */
-    public function it_should_transform_to_gmp_integer()
+    public function test_it_should_transform_to_gmp_integer(): void
     {
         $buffer = ByteBuffer::new('Hello World 😄');
 
-        $this->assertSame(8245075110447257732, $buffer->toGmpInt());
+        self::assertSame(8245075110447257732, $buffer->toGmpInt());
     }
 
-    /** @test */
-    public function it_should_transform_to_gmp_string()
+    public function test_it_should_transform_to_gmp_string(): void
     {
         $buffer = ByteBuffer::new('Hello World 😄');
 
-        $this->assertSame('96231036770496640978624582588703938692', $buffer->toGmpString());
+        self::assertSame('96231036770496640978624582588703938692', $buffer->toGmpString());
     }
 
-    /** @test */
-    public function it_should_transform_to_string_as_binary()
+    public function test_it_should_transform_to_string_as_binary(): void
     {
         $buffer = ByteBuffer::new('Hello World 😄');
 
-        $this->assertSame('Hello World 😄', $buffer->toString('binary'));
+        self::assertSame('Hello World 😄', $buffer->toString('binary'));
     }
 
-    /** @test */
-    public function it_should_transform_to_string_as_hex()
+    public function test_it_should_transform_to_string_as_hex(): void
     {
         $buffer = ByteBuffer::new('Hello World 😄');
 
-        $this->assertSame('48656c6c6f20576f726c6420f09f9884', $buffer->toString('hex'));
+        self::assertSame('48656c6c6f20576f726c6420f09f9884', $buffer->toString('hex'));
     }
 
-    /** @test */
-    public function it_should_transform_to_string_as_utf8()
+    public function test_it_should_transform_to_string_as_utf8(): void
     {
         $buffer = ByteBuffer::new('Hello World 😄');
 
-        $this->assertSame('Hello World 😄', $buffer->toString('utf8'));
+        self::assertSame('Hello World 😄', $buffer->toString('utf8'));
     }
 
-    /** @test */
-    public function it_should_transform_to_string_as_base64()
+    public function test_it_should_transform_to_string_as_base64(): void
     {
         $buffer = ByteBuffer::new('Hello World 😄');
 
-        $this->assertSame('SGVsbG8gV29ybGQg8J+YhA==', $buffer->toString('base64'));
+        self::assertSame('SGVsbG8gV29ybGQg8J+YhA==', $buffer->toString('base64'));
     }
 
-    /** @test */
-    public function it_should_throw_for_invalid_type()
+    public function test_it_should_throw_for_invalid_type(): void
     {
         $this->expectException(\InvalidArgumentException::class);
 

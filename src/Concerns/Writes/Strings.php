@@ -27,8 +27,8 @@ trait Strings
      */
     public function writeUTF8String(string $value, int $offset = 0): self
     {
-        $value  = mb_convert_encoding($value, 'UTF-8', 'ISO-8859-1');
-        $length = strlen($value);
+        $value = \mb_convert_encoding($value, 'UTF-8', 'ISO-8859-1');
+        $length = \mb_strlen($value);
 
         return $this->pack("a{$length}", $value, $offset);
     }
@@ -38,8 +38,8 @@ trait Strings
      */
     public function writeCString(string $value, int $offset = 0): self
     {
-        $value  = mb_convert_encoding($value.' ', 'UTF-8', 'ISO-8859-1');
-        $length = strlen($value);
+        $value = \mb_convert_encoding($value.' ', 'UTF-8', 'ISO-8859-1');
+        $length = \mb_strlen($value);
 
         return $this->pack("Z{$length}", $value, $offset);
     }
@@ -50,7 +50,7 @@ trait Strings
     public function writeIString(string $value, int $offset = 0): self
     {
         $this->fill(3);
-        $this->pack('C', strlen($value), 0);
+        $this->pack('C', \mb_strlen($value), 0);
 
         return $this->writeUTF8String($value, $offset);
     }
@@ -60,7 +60,7 @@ trait Strings
      */
     public function writeVString(string $value, int $offset = 0): self
     {
-        $this->pack('C', strlen($value), 0);
+        $this->pack('C', \mb_strlen($value), 0);
 
         return $this->writeUTF8String($value, $offset);
     }

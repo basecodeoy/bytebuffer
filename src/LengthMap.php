@@ -13,7 +13,7 @@ final class LengthMap
      *
      * @var array
      */
-    const LENGTHS = [
+    public const LENGTHS = [
         // Chars (8 bit)
         'c' => 1,
         'C' => 1,
@@ -58,18 +58,18 @@ final class LengthMap
      */
     public static function get(string $format): int
     {
-        if (in_array($format[0], ['a', 'd', 'f', 'Z'], true)) {
-            return (int) substr($format, 1);
+        if (\in_array($format[0], ['a', 'd', 'f', 'Z'], true)) {
+            return (int) \mb_substr($format, 1);
         }
 
-        if (in_array($format[0], ['h', 'H'], true)) {
-            return (int) substr($format, 1) / 2;
+        if (\in_array($format[0], ['h', 'H'], true)) {
+            return (int) \mb_substr($format, 1) / 2;
         }
 
-        if (! array_key_exists($format, static::LENGTHS)) {
+        if (!\array_key_exists($format, self::LENGTHS)) {
             throw new InvalidArgumentException("The given format [{$format}] is not supported.");
         }
 
-        return static::LENGTHS[$format];
+        return self::LENGTHS[$format];
     }
 }

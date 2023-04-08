@@ -7,92 +7,86 @@ namespace Tests\Unit\Concerns\Reads;
 use PHPUnit\Framework\TestCase;
 use PreemStudio\ByteBuffer\ByteBuffer;
 
+/**
+ * @internal
+ *
+ * @coversNothing
+ */
 final class InitialisableTest extends TestCase
 {
     private $expected = '48656c6c6f20576f726c6420f09f9884';
 
-    /** @test */
-    public function it_should_initialise_from_binary()
+    public function test_it_should_initialise_from_binary(): void
     {
         $buffer = ByteBuffer::fromBinary('Hello World 😄');
 
-        $this->assertSame($this->expected, $buffer->toHex());
+        self::assertSame($this->expected, $buffer->toHex());
     }
 
-    /** @test */
-    public function it_should_initialise_from_hex()
+    public function test_it_should_initialise_from_hex(): void
     {
         $buffer = ByteBuffer::fromHex('48656c6c6f20576f726c6420f09f9884');
 
-        $this->assertSame($this->expected, $buffer->toHex());
+        self::assertSame($this->expected, $buffer->toHex());
     }
 
-    /** @test */
-    public function it_should_fail_to_initialise_from_hex()
+    public function test_it_should_fail_to_initialise_from_hex(): void
     {
         $this->expectException(\InvalidArgumentException::class);
 
         ByteBuffer::fromHex('😄');
     }
 
-    /** @test */
-    public function it_should_initialise_from_utf8()
+    public function test_it_should_initialise_from_utf8(): void
     {
         $buffer = ByteBuffer::fromUTF8('Hello World 😄');
 
-        $this->assertSame($this->expected, $buffer->toHex());
+        self::assertSame($this->expected, $buffer->toHex());
     }
 
-    /** @test */
-    public function it_should_initialise_from_base64()
+    public function test_it_should_initialise_from_base64(): void
     {
-        $buffer = ByteBuffer::fromBase64(base64_encode('Hello World 😄'));
+        $buffer = ByteBuffer::fromBase64(\base64_encode('Hello World 😄'));
 
-        $this->assertSame($this->expected, $buffer->toHex());
+        self::assertSame($this->expected, $buffer->toHex());
     }
 
-    /** @test */
-    public function it_should_initialise_from_array()
+    public function test_it_should_initialise_from_array(): void
     {
-        $buffer = ByteBuffer::fromArray(str_split('Hello World 😄'));
+        $buffer = ByteBuffer::fromArray(\mb_str_split('Hello World 😄'));
 
-        $this->assertSame($this->expected, $buffer->toHex());
+        self::assertSame($this->expected, $buffer->toHex());
     }
 
-    /** @test */
-    public function it_should_initialise_from_string_as_binary()
+    public function test_it_should_initialise_from_string_as_binary(): void
     {
         $buffer = ByteBuffer::fromString('Hello World 😄', 'binary');
 
-        $this->assertSame($this->expected, $buffer->toHex());
+        self::assertSame($this->expected, $buffer->toHex());
     }
 
-    /** @test */
-    public function it_should_initialise_from_string_as_hex()
+    public function test_it_should_initialise_from_string_as_hex(): void
     {
         $buffer = ByteBuffer::fromString('48656c6c6f20576f726c6420f09f9884', 'hex');
 
-        $this->assertSame($this->expected, $buffer->toHex());
+        self::assertSame($this->expected, $buffer->toHex());
     }
 
-    /** @test */
-    public function it_should_initialise_from_string_as_utf8()
+    public function test_it_should_initialise_from_string_as_utf8(): void
     {
         $buffer = ByteBuffer::fromString('Hello World 😄', 'utf8');
 
-        $this->assertSame($this->expected, $buffer->toHex());
+        self::assertSame($this->expected, $buffer->toHex());
     }
 
-    /** @test */
-    public function it_should_initialise_from_string_as_base64()
+    public function test_it_should_initialise_from_string_as_base64(): void
     {
-        $buffer = ByteBuffer::fromString(base64_encode('Hello World 😄'), 'base64');
+        $buffer = ByteBuffer::fromString(\base64_encode('Hello World 😄'), 'base64');
 
-        $this->assertSame($this->expected, $buffer->toHex());
+        self::assertSame($this->expected, $buffer->toHex());
     }
 
-    /** @test */
-    public function it_should_throw_for_invalid_type()
+    public function test_it_should_throw_for_invalid_type(): void
     {
         $this->expectException(\InvalidArgumentException::class);
 

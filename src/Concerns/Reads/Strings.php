@@ -19,7 +19,7 @@ trait Strings
      */
     public function readUTF8String(int $length, int $offset = 0): string
     {
-        return mb_convert_encoding($this->unpack("a{$length}", $offset), 'ISO-8859-1', 'UTF-8');
+        return \mb_convert_encoding($this->unpack("a{$length}", $offset), 'ISO-8859-1', 'UTF-8');
     }
 
     /**
@@ -27,7 +27,7 @@ trait Strings
      */
     public function readCString(int $length, int $offset = 0): string
     {
-        return mb_convert_encoding($this->unpack("Z{$length}", $offset), 'ISO-8859-1', 'UTF-8');
+        return \mb_convert_encoding($this->unpack("Z{$length}", $offset), 'ISO-8859-1', 'UTF-8');
     }
 
     /**

@@ -7,85 +7,82 @@ namespace Tests\Unit\Concerns\Reads;
 use PHPUnit\Framework\TestCase;
 use PreemStudio\ByteBuffer\ByteBuffer;
 
+/**
+ * @internal
+ *
+ * @coversNothing
+ */
 final class UnsignedIntegerTest extends TestCase
 {
-    /** @test */
-    public function it_should_read_uint8()
+    public function test_it_should_read_uint8(): void
     {
         $buffer = ByteBuffer::new(1);
         $buffer->writeUInt8(8);
         $buffer->position(0);
 
-        $this->assertSame(8, $buffer->readUInt8());
+        self::assertSame(8, $buffer->readUInt8());
     }
 
-    /** @test */
-    public function it_should_read_uint16()
+    public function test_it_should_read_uint16(): void
     {
         $buffer = ByteBuffer::new(1);
         $buffer->writeUInt16(16);
         $buffer->position(0);
 
-        $this->assertSame(16, $buffer->readUInt16());
+        self::assertSame(16, $buffer->readUInt16());
     }
 
-    /** @test */
-    public function it_should_read_uint32()
+    public function test_it_should_read_uint32(): void
     {
         $buffer = ByteBuffer::new(1);
         $buffer->writeUInt32(32);
         $buffer->position(0);
 
-        $this->assertSame(32, $buffer->readUInt32());
+        self::assertSame(32, $buffer->readUInt32());
     }
 
-    /** @test */
-    public function it_should_read_uint64()
+    public function test_it_should_read_uint64(): void
     {
         $buffer = ByteBuffer::new(1);
         $buffer->writeUInt64(64);
         $buffer->position(0);
 
-        $this->assertSame(64, $buffer->readUInt64());
+        self::assertSame(64, $buffer->readUInt64());
     }
 
-    /** @test */
-    public function it_should_read_ubyte()
+    public function test_it_should_read_ubyte(): void
     {
         $buffer = ByteBuffer::new(1);
         $buffer->writeUByte(8);
         $buffer->position(0);
 
-        $this->assertSame(8, $buffer->readUByte());
+        self::assertSame(8, $buffer->readUByte());
     }
 
-    /** @test */
-    public function it_should_read_ushort()
+    public function test_it_should_read_ushort(): void
     {
         $buffer = ByteBuffer::new(1);
         $buffer->writeUShort(15);
         $buffer->position(0);
 
-        $this->assertSame(15, $buffer->readUShort());
+        self::assertSame(15, $buffer->readUShort());
     }
 
-    /** @test */
-    public function it_should_read_uint()
+    public function test_it_should_read_uint(): void
     {
         $buffer = ByteBuffer::new(1);
         $buffer->writeUInt(32);
         $buffer->position(0);
 
-        $this->assertSame(32, $buffer->readUInt());
+        self::assertSame(32, $buffer->readUInt());
     }
 
-    /** @test */
-    public function it_should_read_ulong()
+    public function test_it_should_read_ulong(): void
     {
         $buffer = ByteBuffer::new(1);
         $buffer->writeULong(64);
         $buffer->position(0);
 
-        $this->assertSame(64, $buffer->readULong());
+        self::assertSame(64, $buffer->readULong());
     }
 }

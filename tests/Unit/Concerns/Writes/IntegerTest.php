@@ -7,77 +7,74 @@ namespace Tests\Unit\Concerns\Writes;
 use PHPUnit\Framework\TestCase;
 use PreemStudio\ByteBuffer\ByteBuffer;
 
+/**
+ * @internal
+ *
+ * @coversNothing
+ */
 final class IntegerTest extends TestCase
 {
-    /** @test */
-    public function it_should_write_int8()
+    public function test_it_should_write_int8(): void
     {
         $buffer = ByteBuffer::new(1);
         $buffer->writeInt8(8);
 
-        $this->assertSame(1, $buffer->internalSize());
+        self::assertSame(1, $buffer->internalSize());
     }
 
-    /** @test */
-    public function it_should_write_int16()
+    public function test_it_should_write_int16(): void
     {
         $buffer = ByteBuffer::new(1);
         $buffer->writeInt16(16);
 
-        $this->assertSame(2, $buffer->internalSize());
+        self::assertSame(2, $buffer->internalSize());
     }
 
-    /** @test */
-    public function it_should_write_int32()
+    public function test_it_should_write_int32(): void
     {
         $buffer = ByteBuffer::new(1);
         $buffer->writeInt32(32);
 
-        $this->assertSame(4, $buffer->internalSize());
+        self::assertSame(4, $buffer->internalSize());
     }
 
-    /** @test */
-    public function it_should_write_int64()
+    public function test_it_should_write_int64(): void
     {
         $buffer = ByteBuffer::new(1);
         $buffer->writeInt64(64);
 
-        $this->assertSame(8, $buffer->internalSize());
+        self::assertSame(8, $buffer->internalSize());
     }
 
-    /** @test */
-    public function it_should_write_byte()
+    public function test_it_should_write_byte(): void
     {
         $buffer = ByteBuffer::new(1);
         $buffer->writeByte(8);
 
-        $this->assertSame(1, $buffer->internalSize());
+        self::assertSame(1, $buffer->internalSize());
     }
 
-    /** @test */
-    public function it_should_write_short()
+    public function test_it_should_write_short(): void
     {
         $buffer = ByteBuffer::new(1);
         $buffer->writeShort(16);
 
-        $this->assertSame(2, $buffer->internalSize());
+        self::assertSame(2, $buffer->internalSize());
     }
 
-    /** @test */
-    public function it_should_write_int()
+    public function test_it_should_write_int(): void
     {
         $buffer = ByteBuffer::new(1);
         $buffer->writeInt(32);
 
-        $this->assertSame(4, $buffer->internalSize());
+        self::assertSame(4, $buffer->internalSize());
     }
 
-    /** @test */
-    public function it_should_write_long()
+    public function test_it_should_write_long(): void
     {
         $buffer = ByteBuffer::new(1);
         $buffer->writeLong(64);
 
-        $this->assertSame(8, $buffer->internalSize());
+        self::assertSame(8, $buffer->internalSize());
     }
 }

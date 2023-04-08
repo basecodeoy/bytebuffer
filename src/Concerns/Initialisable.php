@@ -21,11 +21,11 @@ trait Initialisable
      */
     public static function fromHex(string $value): self
     {
-        if (strlen($value) > 0 && ! ctype_xdigit($value)) {
+        if ($value !== '' && !\ctype_xdigit($value)) {
             throw new InvalidArgumentException('Buffer::hex: non-hex character passed');
         }
 
-        return new self(pack('H*', $value));
+        return new self(\pack('H*', $value));
     }
 
     /**
@@ -33,7 +33,7 @@ trait Initialisable
      */
     public static function fromUTF8(string $value): self
     {
-        return new self(mb_convert_encoding($value, 'UTF-8', 'UTF-8'));
+        return new self(\mb_convert_encoding($value, 'UTF-8', 'UTF-8'));
     }
 
     /**
@@ -41,7 +41,7 @@ trait Initialisable
      */
     public static function fromBase64(string $value): self
     {
-        return new self(base64_decode($value, true));
+        return new self(\base64_decode($value, true));
     }
 
     /**
@@ -60,12 +60,16 @@ trait Initialisable
         switch ($encoding) {
             case 'binary':
                 return static::fromBinary($value);
+
             case 'hex':
                 return static::fromHex($value);
+
             case 'utf8':
                 return static::fromUTF8($value);
+
             case 'base64':
                 return static::fromBase64($value);
+
             default:
                 throw new InvalidArgumentException("The encoding [{$encoding}] is not supported.");
         }

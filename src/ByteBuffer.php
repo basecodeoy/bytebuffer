@@ -8,13 +8,13 @@ use InvalidArgumentException;
 
 final class ByteBuffer
 {
-    use Concerns\Initialisable,
-        Concerns\Offsetable,
-        Concerns\Positionable,
-        Concerns\Readable,
-        Concerns\Sizeable,
-        Concerns\Transformable,
-        Concerns\Writeable;
+    use Concerns\Initialisable;
+    use Concerns\Offsetable;
+    use Concerns\Positionable;
+    use Concerns\Readable;
+    use Concerns\Sizeable;
+    use Concerns\Transformable;
+    use Concerns\Writeable;
 
     /**
      * Backing ArrayBuffer.
@@ -46,20 +46,25 @@ final class ByteBuffer
 
     /**
      * Constructs a new ByteBuffer.
+     *
+     * @param mixed $value
      */
     private function __construct($value)
     {
-        switch (gettype($value)) {
+        switch (\gettype($value)) {
             case 'array':
-                $this->initializeBuffer(count($value), $value);
+                $this->initializeBuffer(\count($value), $value);
+
                 break;
 
             case 'integer':
-                $this->initializeBuffer($value, pack("x{$value}"));
+                $this->initializeBuffer($value, \pack("x{$value}"));
+
                 break;
 
             case 'string':
-                $this->initializeBuffer(strlen($value), $value);
+                $this->initializeBuffer(\mb_strlen($value), $value);
+
                 break;
 
             default:
@@ -69,6 +74,8 @@ final class ByteBuffer
 
     /**
      * Dynamically retrieve a value from the buffer.
+     *
+     * @param mixed $offset
      */
     public function __get($offset)
     {
@@ -77,14 +84,19 @@ final class ByteBuffer
 
     /**
      * Dynamically set a value in the buffer.
+     *
+     * @param mixed $offset
+     * @param mixed $value
      */
-    public function __set($offset, $value)
+    public function __set($offset, $value): void
     {
         $this->offsetSet($offset, $value);
     }
 
     /**
      * Dynamically check if a value in the buffer is set.
+     *
+     * @param mixed $offset
      */
     public function __isset($offset)
     {
@@ -93,14 +105,18 @@ final class ByteBuffer
 
     /**
      * Dynamically unset a value in the buffer.
+     *
+     * @param mixed $offset
      */
-    public function __unset($offset)
+    public function __unset($offset): void
     {
         $this->offsetUnset($offset);
     }
 
     /**
      * Allocates a new ByteBuffer backed by a buffer with the specified data.
+     *
+     * @param mixed $value
      */
     public static function new($value): self
     {
@@ -121,6 +137,8 @@ final class ByteBuffer
 
     /**
      * Initialise a new buffer from the given content.
+     *
+     * @param mixed $content
      */
     public function initializeBuffer(int $length, $content): void
     {
@@ -133,14 +151,16 @@ final class ByteBuffer
 
     /**
      * Pack data into a binary string.
+     *
+     * @param mixed $value
      */
     public function pack(string $format, $value, int $offset): self
     {
         $this->skip($offset);
 
-        $bytes = pack($format, $value);
+        $bytes = \pack($format, $value);
 
-        for ($i = 0; $i < strlen($bytes); $i++) {
+        for ($i = 0; $i < \mb_strlen($bytes); $i++) {
             $this->buffer[$this->offset++] = $bytes[$i];
         }
 
@@ -154,7 +174,7 @@ final class ByteBuffer
     {
         $this->skip($offset);
 
-        $value = unpack($format, $this->toBinary(), $this->offset)[1];
+        $value = \unpack($format, $this->toBinary(), $this->offset)[1];
 
         $this->skip(LengthMap::get($format));
 
@@ -176,7 +196,7 @@ final class ByteBuffer
     {
         $initial = $buffers[0];
 
-        foreach (array_slice($buffers, 1) as $buffer) {
+        foreach (\array_slice($buffers, 1) as $buffer) {
             $initial->append($buffer);
         }
 
@@ -185,6 +205,8 @@ final class ByteBuffer
 
     /**
      * Appends some data to this ByteBuffer.
+     *
+     * @param mixed $value
      */
     public function append($value, int $offset = 0): self
     {
@@ -192,13 +214,13 @@ final class ByteBuffer
             $value = $value->toArray($offset);
         }
 
-        if (is_string($value)) {
-            $value = str_split($value);
+        if (\is_string($value)) {
+            $value = \mb_str_split($value);
         }
 
-        $buffer = array_merge($this->buffer, $value);
+        $buffer = \array_merge($this->buffer, $value);
 
-        $bufferCount = count($buffer);
+        $bufferCount = \count($buffer);
         $this->initializeBuffer($bufferCount, $buffer);
         $this->position($bufferCount); // move current offset to the end of merged buffer after append
 
@@ -215,6 +237,8 @@ final class ByteBuffer
 
     /**
      * Prepends some data to this ByteBuffer.
+     *
+     * @param mixed $value
      */
     public function prepend($value, int $offset = 0): self
     {
@@ -222,17 +246,17 @@ final class ByteBuffer
             $value = $value->toArray($offset);
         }
 
-        if (is_string($value)) {
-            $value = str_split($value);
+        if (\is_string($value)) {
+            $value = \mb_str_split($value);
         }
 
         $buffer = $this->buffer;
 
-        foreach (array_reverse($value) as $item) {
-            array_unshift($buffer, $item);
+        foreach (\array_reverse($value) as $item) {
+            \array_unshift($buffer, $item);
         }
 
-        $bufferCount = count($buffer);
+        $bufferCount = \count($buffer);
         $this->initializeBuffer($bufferCount, $buffer);
         $this->position($bufferCount); // move current offset to the end of merged buffer after prepend
 
@@ -257,7 +281,7 @@ final class ByteBuffer
         }
 
         for ($i = 0; $i < $length; $i++) {
-            $this->buffer[$this->offset++] = pack('x');
+            $this->buffer[$this->offset++] = \pack('x');
         }
 
         return $this;
@@ -268,9 +292,9 @@ final class ByteBuffer
      */
     public function flip(int $start = 0, int $length = 0): self
     {
-        $reversed = array_reverse($this->slice($start, $length));
+        $reversed = \array_reverse($this->slice($start, $length));
 
-        $this->initializeBuffer(count($reversed), $reversed);
+        $this->initializeBuffer(\count($reversed), $reversed);
 
         return $this;
     }
@@ -310,7 +334,7 @@ final class ByteBuffer
             throw new InvalidArgumentException('Length exceeds buffer length');
         }
 
-        return array_slice($this->buffer, $offset, $length);
+        return \array_slice($this->buffer, $offset, $length);
     }
 
     /**
@@ -324,6 +348,8 @@ final class ByteBuffer
 
     /**
      * Determine if the given value is a ByteBuffer.
+     *
+     * @param mixed $value
      */
     public static function isByteBuffer($value): bool
     {
