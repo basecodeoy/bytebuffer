@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Tests\Unit\Concerns\Writes;
 
-use PHPUnit\Framework\TestCase;
 use BombenProdukt\ByteBuffer\ByteBuffer;
+use PHPUnit\Framework\TestCase;
 
 /**
  * @internal
