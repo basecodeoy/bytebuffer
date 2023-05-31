@@ -136,6 +136,30 @@ final class ByteBuffer
     }
 
     /**
+     * Concatenates multiple ByteBuffers into one.
+     */
+    public static function concat(...$buffers): self
+    {
+        $initial = $buffers[0];
+
+        foreach (\array_slice($buffers, 1) as $buffer) {
+            $initial->append($buffer);
+        }
+
+        return $initial;
+    }
+
+    /**
+     * Determine if the given value is a ByteBuffer.
+     *
+     * @param mixed $value
+     */
+    public static function isByteBuffer($value): bool
+    {
+        return $value instanceof self;
+    }
+
+    /**
      * Initialise a new buffer from the given content.
      *
      * @param mixed $content
@@ -187,20 +211,6 @@ final class ByteBuffer
     public function get(int $offset)
     {
         return $this->offsetGet($offset);
-    }
-
-    /**
-     * Concatenates multiple ByteBuffers into one.
-     */
-    public static function concat(...$buffers): self
-    {
-        $initial = $buffers[0];
-
-        foreach (\array_slice($buffers, 1) as $buffer) {
-            $initial->append($buffer);
-        }
-
-        return $initial;
     }
 
     /**
@@ -344,16 +354,6 @@ final class ByteBuffer
     {
         return $buffer->capacity() === $this->capacity()
              && $buffer->toBinary() === $this->toBinary();
-    }
-
-    /**
-     * Determine if the given value is a ByteBuffer.
-     *
-     * @param mixed $value
-     */
-    public static function isByteBuffer($value): bool
-    {
-        return $value instanceof self;
     }
 
     /**
