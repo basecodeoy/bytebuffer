@@ -4,20 +4,6 @@
     </a>
 </p>
 
-<p align="center">
-    <a href="https://github.com/faustbrian/bytebuffer/actions">
-        <img src="https://badge.sh/github/check-runs/BombenProdukt/bytebuffer" alt="Checks" />
-    </a>
-    <a href="https://packagist.org/packages/bombenprodukt/bytebuffer">
-        <img src="https://badge.sh/packagist/downloads/BombenProdukt/bytebuffer" alt="Downloads" />
-    </a>
-    <a href="https://packagist.org/packages/bombenprodukt/bytebuffer">
-        <img src="https://badge.sh/packagist/version/BombenProdukt/bytebuffer" alt="Version" />
-    </a>
-    <a href="https://packagist.org/packages/bombenprodukt/bytebuffer">
-        <img src="https://badge.sh/packagist/license/BombenProdukt/bytebuffer" alt="License" />
-    </a>
-</p>
 
 ## About ByteBuffer
 
