@@ -1,0 +1,76 @@
+parameters:
+	ignoreErrors:
+		-
+			message: "#^Cannot access offset 1 on array\\|false\\.$#"
+			count: 2
+			path: src/ByteBuffer.php
+
+		-
+			message: "#^Cannot access offset int\\<0, max\\> on mixed\\.$#"
+			count: 1
+			path: src/ByteBuffer.php
+
+		-
+			message: "#^Method BombenProdukt\\\\ByteBuffer\\\\ByteBuffer\\:\\:__get\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: src/ByteBuffer.php
+
+		-
+			message: "#^Method BombenProdukt\\\\ByteBuffer\\\\ByteBuffer\\:\\:concat\\(\\) has parameter \\$buffers with no type specified\\.$#"
+			count: 1
+			path: src/ByteBuffer.php
+
+		-
+			message: "#^Method BombenProdukt\\\\ByteBuffer\\\\ByteBuffer\\:\\:get\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: src/ByteBuffer.php
+
+		-
+			message: "#^Method BombenProdukt\\\\ByteBuffer\\\\ByteBuffer\\:\\:offsetGet\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: src/ByteBuffer.php
+
+		-
+			message: "#^Method BombenProdukt\\\\ByteBuffer\\\\ByteBuffer\\:\\:readCString\\(\\) should return string but returns array\\<int, string\\>\\|string\\|false\\.$#"
+			count: 1
+			path: src/ByteBuffer.php
+
+		-
+			message: "#^Method BombenProdukt\\\\ByteBuffer\\\\ByteBuffer\\:\\:readUTF8String\\(\\) should return string but returns array\\<int, string\\>\\|string\\|false\\.$#"
+			count: 1
+			path: src/ByteBuffer.php
+
+		-
+			message: "#^Method BombenProdukt\\\\ByteBuffer\\\\ByteBuffer\\:\\:unpack\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: src/ByteBuffer.php
+
+		-
+			message: "#^Parameter \\#1 \\$array of function array_reverse expects array, mixed given\\.$#"
+			count: 1
+			path: src/ByteBuffer.php
+
+		-
+			message: "#^Parameter \\#1 \\$offset of method BombenProdukt\\\\ByteBuffer\\\\ByteBuffer\\:\\:offsetExists\\(\\) expects int, mixed given\\.$#"
+			count: 1
+			path: src/ByteBuffer.php
+
+		-
+			message: "#^Parameter \\#1 \\$offset of method BombenProdukt\\\\ByteBuffer\\\\ByteBuffer\\:\\:offsetGet\\(\\) expects int, mixed given\\.$#"
+			count: 1
+			path: src/ByteBuffer.php
+
+		-
+			message: "#^Parameter \\#1 \\$offset of method BombenProdukt\\\\ByteBuffer\\\\ByteBuffer\\:\\:offsetSet\\(\\) expects int, mixed given\\.$#"
+			count: 1
+			path: src/ByteBuffer.php
+
+		-
+			message: "#^Parameter \\#1 \\$offset of method BombenProdukt\\\\ByteBuffer\\\\ByteBuffer\\:\\:offsetUnset\\(\\) expects int, mixed given\\.$#"
+			count: 1
+			path: src/ByteBuffer.php
+
+		-
+			message: "#^Parameter \\#2 \\.\\.\\.\\$arrays of function array_merge expects array, mixed given\\.$#"
+			count: 1
+			path: src/ByteBuffer.php
