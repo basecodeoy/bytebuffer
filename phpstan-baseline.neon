@@ -1,0 +1,126 @@
+parameters:
+	ignoreErrors:
+		-
+			message: "#^Cannot call method in\\(\\) on iterable\\<SplFileInfo\\>\\.$#"
+			count: 1
+			path: .php-cs-fixer.php
+
+		-
+			message: "#^Cannot access offset 1 on array\\|false\\.$#"
+			count: 2
+			path: src/ByteBuffer.php
+
+		-
+			message: "#^Cannot access offset int\\<0, max\\> on mixed\\.$#"
+			count: 1
+			path: src/ByteBuffer.php
+
+		-
+			message: "#^Method BaseCodeOy\\\\ByteBuffer\\\\ByteBuffer\\:\\:__get\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: src/ByteBuffer.php
+
+		-
+			message: "#^Method BaseCodeOy\\\\ByteBuffer\\\\ByteBuffer\\:\\:concat\\(\\) has parameter \\$buffers with no type specified\\.$#"
+			count: 1
+			path: src/ByteBuffer.php
+
+		-
+			message: "#^Method BaseCodeOy\\\\ByteBuffer\\\\ByteBuffer\\:\\:fromArray\\(\\) has parameter \\$value with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/ByteBuffer.php
+
+		-
+			message: "#^Method BaseCodeOy\\\\ByteBuffer\\\\ByteBuffer\\:\\:get\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: src/ByteBuffer.php
+
+		-
+			message: "#^Method BaseCodeOy\\\\ByteBuffer\\\\ByteBuffer\\:\\:offsetGet\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: src/ByteBuffer.php
+
+		-
+			message: "#^Method BaseCodeOy\\\\ByteBuffer\\\\ByteBuffer\\:\\:readCString\\(\\) should return string but returns array\\<int, string\\>\\|string\\|false\\.$#"
+			count: 1
+			path: src/ByteBuffer.php
+
+		-
+			message: "#^Method BaseCodeOy\\\\ByteBuffer\\\\ByteBuffer\\:\\:readUTF8String\\(\\) should return string but returns array\\<int, string\\>\\|string\\|false\\.$#"
+			count: 1
+			path: src/ByteBuffer.php
+
+		-
+			message: "#^Method BaseCodeOy\\\\ByteBuffer\\\\ByteBuffer\\:\\:slice\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/ByteBuffer.php
+
+		-
+			message: "#^Method BaseCodeOy\\\\ByteBuffer\\\\ByteBuffer\\:\\:toArray\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/ByteBuffer.php
+
+		-
+			message: "#^Method BaseCodeOy\\\\ByteBuffer\\\\ByteBuffer\\:\\:unpack\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: src/ByteBuffer.php
+
+		-
+			message: "#^Parameter \\#1 \\$array of function array_reverse expects array, mixed given\\.$#"
+			count: 1
+			path: src/ByteBuffer.php
+
+		-
+			message: "#^Parameter \\#1 \\$key of function array_key_exists expects int\\|string, mixed given\\.$#"
+			count: 1
+			path: src/ByteBuffer.php
+
+		-
+			message: "#^Parameter \\#2 \\.\\.\\.\\$arrays of function array_merge expects array, mixed given\\.$#"
+			count: 1
+			path: src/ByteBuffer.php
+
+		-
+			message: "#^Property BaseCodeOy\\\\ByteBuffer\\\\ByteBuffer\\:\\:\\$buffer type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/ByteBuffer.php
+
+		-
+			message: "#^Constant BaseCodeOy\\\\ByteBuffer\\\\LengthMap\\:\\:LENGTHS type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/LengthMap.php
+
+		-
+			message: "#^Undefined variable\\: \\$this$#"
+			count: 1
+			path: tests/Pest.php
+
+		-
+			message: "#^Call to protected method expectException\\(\\) of class PHPUnit\\\\Framework\\\\TestCase\\.$#"
+			count: 4
+			path: tests/Unit/ByteBufferTest.php
+
+		-
+			message: "#^Cannot access offset 1 on array\\|false\\.$#"
+			count: 2
+			path: tests/Unit/ByteBufferTest.php
+
+		-
+			message: "#^Dynamic call to static method BaseCodeOy\\\\ByteBuffer\\\\ByteBuffer\\:\\:isByteBuffer\\(\\)\\.$#"
+			count: 1
+			path: tests/Unit/ByteBufferTest.php
+
+		-
+			message: "#^Call to protected method expectException\\(\\) of class PHPUnit\\\\Framework\\\\TestCase\\.$#"
+			count: 2
+			path: tests/Unit/Concerns/InitialisableTest.php
+
+		-
+			message: "#^Call to protected method expectException\\(\\) of class PHPUnit\\\\Framework\\\\TestCase\\.$#"
+			count: 1
+			path: tests/Unit/Concerns/TransformableTest.php
+
+		-
+			message: "#^Call to protected method expectException\\(\\) of class PHPUnit\\\\Framework\\\\TestCase\\.$#"
+			count: 1
+			path: tests/Unit/LengthMapTest.php
