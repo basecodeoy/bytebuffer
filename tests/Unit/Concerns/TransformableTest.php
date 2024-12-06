@@ -7,106 +7,82 @@
  * the LICENSE file that was distributed with this source code.
  */
 
-namespace Tests\Unit\Concerns\Reads;
-
 use BaseCodeOy\ByteBuffer\ByteBuffer;
-use PHPUnit\Framework\TestCase;
 
-/**
- * @internal
- *
- * @coversNothing
- */
-final class TransformableTest extends TestCase
-{
-    public function test_it_should_transform_to_binary(): void
-    {
-        $buffer = ByteBuffer::new('Hello World 😄');
+test('it should transform to binary', function (): void {
+    $byteBuffer = ByteBuffer::new('Hello World 😄');
 
-        self::assertSame('Hello World 😄', $buffer->toBinary());
-    }
+    expect($byteBuffer->toBinary())->toBe('Hello World 😄');
+});
 
-    public function test_it_should_transform_to_hex(): void
-    {
-        $buffer = ByteBuffer::new('Hello World 😄');
+test('it should transform to hex', function (): void {
+    $byteBuffer = ByteBuffer::new('Hello World 😄');
 
-        self::assertSame('48656c6c6f20576f726c6420f09f9884', $buffer->toHex());
-    }
+    expect($byteBuffer->toHex())->toBe('48656c6c6f20576f726c6420f09f9884');
+});
 
-    public function test_it_should_transform_to_utf8(): void
-    {
-        $buffer = ByteBuffer::new('Hello World 😄');
+test('it should transform to utf8', function (): void {
+    $byteBuffer = ByteBuffer::new('Hello World 😄');
 
-        self::assertSame('Hello World 😄', $buffer->toUTF8());
-    }
+    expect($byteBuffer->toUTF8())->toBe('Hello World 😄');
+});
 
-    public function test_it_should_transform_to_base64(): void
-    {
-        $buffer = ByteBuffer::new('Hello World 😄');
+test('it should transform to base64', function (): void {
+    $byteBuffer = ByteBuffer::new('Hello World 😄');
 
-        self::assertSame('SGVsbG8gV29ybGQg8J+YhA==', $buffer->toBase64());
-    }
+    expect($byteBuffer->toBase64())->toBe('SGVsbG8gV29ybGQg8J+YhA==');
+});
 
-    public function test_it_should_transform_to_array(): void
-    {
-        $buffer = ByteBuffer::new('Hello World 😄');
+test('it should transform to array', function (): void {
+    $byteBuffer = ByteBuffer::new('Hello World 😄');
 
-        self::assertSame(\mb_str_split('Hello World 😄'), $buffer->toArray());
-    }
+    expect($byteBuffer->toArray())->toBe(\mb_str_split('Hello World 😄'));
+});
 
-    public function test_it_should_transform_to_gmp(): void
-    {
-        $buffer = ByteBuffer::new('Hello World 😄');
+test('it should transform to gmp', function (): void {
+    $byteBuffer = ByteBuffer::new('Hello World 😄');
 
-        self::assertInstanceOf(\GMP::class, $buffer->toGmp());
-    }
+    expect($byteBuffer->toGmp())->toBeInstanceOf(GMP::class);
+});
 
-    public function test_it_should_transform_to_gmp_integer(): void
-    {
-        $buffer = ByteBuffer::new('Hello World 😄');
+test('it should transform to gmp integer', function (): void {
+    $byteBuffer = ByteBuffer::new('Hello World 😄');
 
-        self::assertSame(8_245_075_110_447_257_732, $buffer->toGmpInt());
-    }
+    expect($byteBuffer->toGmpInt())->toBe(8_245_075_110_447_257_732);
+});
 
-    public function test_it_should_transform_to_gmp_string(): void
-    {
-        $buffer = ByteBuffer::new('Hello World 😄');
+test('it should transform to gmp string', function (): void {
+    $byteBuffer = ByteBuffer::new('Hello World 😄');
 
-        self::assertSame('96231036770496640978624582588703938692', $buffer->toGmpString());
-    }
+    expect($byteBuffer->toGmpString())->toBe('96231036770496640978624582588703938692');
+});
 
-    public function test_it_should_transform_to_string_as_binary(): void
-    {
-        $buffer = ByteBuffer::new('Hello World 😄');
+test('it should transform to string as binary', function (): void {
+    $byteBuffer = ByteBuffer::new('Hello World 😄');
 
-        self::assertSame('Hello World 😄', $buffer->toString('binary'));
-    }
+    expect($byteBuffer->toString('binary'))->toBe('Hello World 😄');
+});
 
-    public function test_it_should_transform_to_string_as_hex(): void
-    {
-        $buffer = ByteBuffer::new('Hello World 😄');
+test('it should transform to string as hex', function (): void {
+    $byteBuffer = ByteBuffer::new('Hello World 😄');
 
-        self::assertSame('48656c6c6f20576f726c6420f09f9884', $buffer->toString('hex'));
-    }
+    expect($byteBuffer->toString('hex'))->toBe('48656c6c6f20576f726c6420f09f9884');
+});
 
-    public function test_it_should_transform_to_string_as_utf8(): void
-    {
-        $buffer = ByteBuffer::new('Hello World 😄');
+test('it should transform to string as utf8', function (): void {
+    $byteBuffer = ByteBuffer::new('Hello World 😄');
 
-        self::assertSame('Hello World 😄', $buffer->toString('utf8'));
-    }
+    expect($byteBuffer->toString('utf8'))->toBe('Hello World 😄');
+});
 
-    public function test_it_should_transform_to_string_as_base64(): void
-    {
-        $buffer = ByteBuffer::new('Hello World 😄');
+test('it should transform to string as base64', function (): void {
+    $byteBuffer = ByteBuffer::new('Hello World 😄');
 
-        self::assertSame('SGVsbG8gV29ybGQg8J+YhA==', $buffer->toString('base64'));
-    }
+    expect($byteBuffer->toString('base64'))->toBe('SGVsbG8gV29ybGQg8J+YhA==');
+});
 
-    public function test_it_should_throw_for_invalid_type(): void
-    {
-        $this->expectException(\InvalidArgumentException::class);
+test('it should throw for invalid type', function (): void {
+    $this->expectException(InvalidArgumentException::class);
 
-        ByteBuffer::new('Hello World 😄')->toString('_INVALID_');
-    }
-}
+    ByteBuffer::new('Hello World 😄')->toString('_INVALID_');
+});

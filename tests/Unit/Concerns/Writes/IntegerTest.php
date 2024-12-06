@@ -7,79 +7,60 @@
  * the LICENSE file that was distributed with this source code.
  */
 
-namespace Tests\Unit\Concerns\Writes;
-
 use BaseCodeOy\ByteBuffer\ByteBuffer;
-use PHPUnit\Framework\TestCase;
 
-/**
- * @internal
- *
- * @coversNothing
- */
-final class IntegerTest extends TestCase
-{
-    public function test_it_should_write_int8(): void
-    {
-        $buffer = ByteBuffer::new(1);
-        $buffer->writeInt8(8);
+test('it should write int8', function (): void {
+    $byteBuffer = ByteBuffer::new(1);
+    $byteBuffer->writeInt8(8);
 
-        self::assertSame(1, $buffer->internalSize());
-    }
+    expect($byteBuffer->internalSize())->toBe(1);
+});
 
-    public function test_it_should_write_int16(): void
-    {
-        $buffer = ByteBuffer::new(1);
-        $buffer->writeInt16(16);
+test('it should write int16', function (): void {
+    $byteBuffer = ByteBuffer::new(1);
+    $byteBuffer->writeInt16(16);
 
-        self::assertSame(2, $buffer->internalSize());
-    }
+    expect($byteBuffer->internalSize())->toBe(2);
+});
 
-    public function test_it_should_write_int32(): void
-    {
-        $buffer = ByteBuffer::new(1);
-        $buffer->writeInt32(32);
+test('it should write int32', function (): void {
+    $byteBuffer = ByteBuffer::new(1);
+    $byteBuffer->writeInt32(32);
 
-        self::assertSame(4, $buffer->internalSize());
-    }
+    expect($byteBuffer->internalSize())->toBe(4);
+});
 
-    public function test_it_should_write_int64(): void
-    {
-        $buffer = ByteBuffer::new(1);
-        $buffer->writeInt64(64);
+test('it should write int64', function (): void {
+    $byteBuffer = ByteBuffer::new(1);
+    $byteBuffer->writeInt64(64);
 
-        self::assertSame(8, $buffer->internalSize());
-    }
+    expect($byteBuffer->internalSize())->toBe(8);
+});
 
-    public function test_it_should_write_byte(): void
-    {
-        $buffer = ByteBuffer::new(1);
-        $buffer->writeByte(8);
+test('it should write byte', function (): void {
+    $byteBuffer = ByteBuffer::new(1);
+    $byteBuffer->writeByte(8);
 
-        self::assertSame(1, $buffer->internalSize());
-    }
+    expect($byteBuffer->internalSize())->toBe(1);
+});
 
-    public function test_it_should_write_short(): void
-    {
-        $buffer = ByteBuffer::new(1);
-        $buffer->writeShort(16);
+test('it should write short', function (): void {
+    $byteBuffer = ByteBuffer::new(1);
+    $byteBuffer->writeShort(16);
 
-        self::assertSame(2, $buffer->internalSize());
-    }
+    expect($byteBuffer->internalSize())->toBe(2);
+});
 
-    public function test_it_should_write_int(): void
-    {
-        $buffer = ByteBuffer::new(1);
-        $buffer->writeInt(32);
+test('it should write int', function (): void {
+    $byteBuffer = ByteBuffer::new(1);
+    $byteBuffer->writeInt(32);
 
-        self::assertSame(4, $buffer->internalSize());
-    }
+    expect($byteBuffer->internalSize())->toBe(4);
+});
 
-    public function test_it_should_write_long(): void
-    {
-        $buffer = ByteBuffer::new(1);
-        $buffer->writeLong(64);
+test('it should write long', function (): void {
+    $byteBuffer = ByteBuffer::new(1);
+    $byteBuffer->writeLong(64);
 
-        self::assertSame(8, $buffer->internalSize());
-    }
-}
+    expect($byteBuffer->internalSize())->toBe(8);
+});

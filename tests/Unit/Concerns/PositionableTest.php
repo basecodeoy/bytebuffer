@@ -7,73 +7,56 @@
  * the LICENSE file that was distributed with this source code.
  */
 
-namespace Tests\Unit\Concerns\Reads;
-
 use BaseCodeOy\ByteBuffer\ByteBuffer;
-use PHPUnit\Framework\TestCase;
 
-/**
- * @internal
- *
- * @coversNothing
- */
-final class PositionableTest extends TestCase
-{
-    public function test_it_should_current_the_offset(): void
-    {
-        $buffer = ByteBuffer::new(8);
-        $buffer->current();
+test('it should current the offset', function (): void {
+    $byteBuffer = ByteBuffer::new(8);
+    $byteBuffer->current();
 
-        self::assertSame(0, $buffer->current());
-    }
+    expect($byteBuffer->current())->toBe(0);
+});
 
-    public function test_it_should_set_the_offset_to_the_given_value(): void
-    {
-        $buffer = ByteBuffer::new(8);
-        $buffer->position(5);
+test('it should set the offset to the given value', function (): void {
+    $byteBuffer = ByteBuffer::new(8);
+    $byteBuffer->position(5);
 
-        self::assertSame(5, $buffer->current());
-    }
+    expect($byteBuffer->current())->toBe(5);
+});
 
-    public function test_it_should_skip_the_given_number_of_bytes(): void
-    {
-        $buffer = ByteBuffer::new(8);
-        $buffer->skip(2);
-        $buffer->skip(3);
-        $buffer->skip(1);
+test('it should skip the given number of bytes', function (): void {
+    $byteBuffer = ByteBuffer::new(8);
+    $byteBuffer->skip(2);
+    $byteBuffer->skip(3);
+    $byteBuffer->skip(1);
 
-        self::assertSame(6, $buffer->current());
-    }
+    expect($byteBuffer->current())->toBe(6);
+});
 
-    public function test_it_should_rewind_the_given_number_of_bytes(): void
-    {
-        $buffer = ByteBuffer::new(8);
-        $buffer->position(5);
-        $buffer->rewind(3);
-        $buffer->rewind(1);
+test('it should rewind the given number of bytes', function (): void {
+    $byteBuffer = ByteBuffer::new(8);
+    $byteBuffer->position(5);
+    $byteBuffer->rewind(3);
+    $byteBuffer->rewind(1);
 
-        self::assertSame(1, $buffer->current());
-    }
+    expect($byteBuffer->current())->toBe(1);
+});
 
-    public function test_it_should_reset_the_offset(): void
-    {
-        $buffer = ByteBuffer::new(8);
-        $buffer->position(5);
-        self::assertSame(5, $buffer->current());
+test('it should reset the offset', function (): void {
+    $byteBuffer = ByteBuffer::new(8);
+    $byteBuffer->position(5);
+    expect($byteBuffer->current())->toBe(5);
 
-        $buffer->reset();
-        self::assertSame(0, $buffer->current());
-    }
+    $byteBuffer->reset();
+    expect($byteBuffer->current())->toBe(0);
+});
 
-    public function test_it_should_clear_the_offset(): void
-    {
-        $buffer = ByteBuffer::new(8);
-        $buffer->position(5);
-        self::assertSame(5, $buffer->current());
-        self::assertSame(8, $buffer->capacity());
+test('it should clear the offset', function (): void {
+    $byteBuffer = ByteBuffer::new(8);
+    $byteBuffer->position(5);
+    expect($byteBuffer->current())->toBe(5);
+    expect($byteBuffer->capacity())->toBe(8);
 
-        $buffer->clear();
-        self::assertSame(0, $buffer->current());
-        self::assertSame(8, $buffer->capacity());
-    }
-}
+    $byteBuffer->clear();
+    expect($byteBuffer->current())->toBe(0);
+    expect($byteBuffer->capacity())->toBe(8);
+});

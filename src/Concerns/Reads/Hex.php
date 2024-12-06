@@ -16,7 +16,7 @@ trait Hex
      */
     public function readHex(int $length): string
     {
-        return $this->unpack("H{$length}");
+        return $this->unpack('H'.$length);
     }
 
     /**

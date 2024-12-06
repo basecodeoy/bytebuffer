@@ -7,294 +7,255 @@
  * the LICENSE file that was distributed with this source code.
  */
 
-namespace Tests\Unit;
-
 use BaseCodeOy\ByteBuffer\ByteBuffer;
-use PHPUnit\Framework\TestCase;
-
-/**
- * @internal
- *
- * @coversNothing
- */
-final class ByteBufferTest extends TestCase
-{
-    public function test_it_should_get_the_value_at_the_given_offset(): void
-    {
-        $buffer = ByteBuffer::new('Hello World');
-
-        self::assertSame('e', $buffer->__get(1));
-    }
-
-    public function test_it_should_set_the_value_at_the_given_offset(): void
-    {
-        $buffer = ByteBuffer::new('Hello World');
-        $buffer->__set(1, 'X');
-
-        self::assertSame('X', $buffer->__get(1));
-    }
-
-    public function test_it_should_check_if_the_offset_exists(): void
-    {
-        $buffer = ByteBuffer::new('Hello World');
-
-        self::assertTrue($buffer->__isset(1));
-    }
-
-    public function test_it_should_unset_the_value_at_the_given_offset(): void
-    {
-        $buffer = ByteBuffer::new('Hello World');
-        $buffer->__unset(1);
-
-        self::assertFalse($buffer->__isset(1));
-    }
-
-    public function test_it_should_initialise_from_array(): void
-    {
-        $buffer = ByteBuffer::new(\mb_str_split('Hello World'));
-
-        self::assertInstanceOf(ByteBuffer::class, $buffer);
-        self::assertSame(11, $buffer->internalSize());
-    }
-
-    public function test_it_should_initialise_from_integer(): void
-    {
-        $buffer = ByteBuffer::new(11);
-
-        self::assertInstanceOf(ByteBuffer::class, $buffer);
-        self::assertSame(11, $buffer->internalSize());
-    }
-
-    public function test_it_should_initialise_from_string(): void
-    {
-        $buffer = ByteBuffer::new('Hello World');
-
-        self::assertInstanceOf(ByteBuffer::class, $buffer);
-        self::assertSame(11, $buffer->internalSize());
-    }
-
-    public function test_it_should_throw_for_invalid_type(): void
-    {
-        $this->expectException(\InvalidArgumentException::class);
-
-        $buffer = ByteBuffer::new(123.456);
-    }
-
-    public function test_it_should_allocate_the_given_number_of_bytes(): void
-    {
-        $buffer = ByteBuffer::allocate(11);
-
-        self::assertInstanceOf(ByteBuffer::class, $buffer);
-        self::assertSame(11, $buffer->internalSize());
-    }
-
-    public function test_it_should_fail_to_allocate_the_given_number_of_bytes(): void
-    {
-        $this->expectException(\InvalidArgumentException::class);
-
-        ByteBuffer::allocate(-1);
-    }
-
-    public function test_it_should_initialise_the_buffer(): void
-    {
-        $buffer = ByteBuffer::allocate(11);
-        $buffer->initializeBuffer(11, 'Hello World');
-
-        self::assertSame('Hello World', $buffer->toUTF8());
-        self::assertSame(11, $buffer->internalSize());
-    }
-
-    public function test_it_should_pack_the_given_value(): void
-    {
-        $buffer = ByteBuffer::allocate(11);
-        $buffer->pack('C', 255, 0);
-
-        self::assertSame(255, \unpack('C', $buffer->offsetGet(0))[1]);
-    }
-
-    public function test_it_should_unpack_the_given_value(): void
-    {
-        $buffer = ByteBuffer::allocate(11);
-        $buffer->pack('C', 255, 0);
-        $buffer->position(0);
 
-        self::assertSame(255, $buffer->unpack('C'));
-    }
-
-    public function test_it_should_get_the_value(): void
-    {
-        $buffer = ByteBuffer::allocate(11);
-        $buffer->pack('C', 255, 0);
-
-        self::assertSame(255, \unpack('C', $buffer->get(0))[1]);
-    }
-
-    public function test_it_should_concat_the_given_buffers(): void
-    {
-        $hello = ByteBuffer::new('Hello');
-        $world = ByteBuffer::new('World');
-
-        $buffer = ByteBuffer::concat($hello, $world);
-
-        self::assertSame('HelloWorld', $buffer->toUTF8());
-    }
+test('it should get the value at the given offset', function (): void {
+    $byteBuffer = ByteBuffer::new('Hello World');
 
-    public function test_it_should_append_the_given_buffer(): void
-    {
-        $buffer = ByteBuffer::new('Hello');
-        $buffer->append(ByteBuffer::new('World'));
-
-        self::assertSame('HelloWorld', $buffer->toUTF8());
-        self::assertSame($buffer->capacity(), $buffer->current()); // offset should be at the end of new buffer
-    }
-
-    public function test_it_should_append_the_given_string(): void
-    {
-        $buffer = ByteBuffer::new('Hello');
-        $buffer->append('World');
+    expect($byteBuffer->__get(1))->toBe('e');
+});
 
-        self::assertSame('HelloWorld', $buffer->toUTF8());
-        self::assertSame($buffer->capacity(), $buffer->current()); // offset should be at the end of new buffer
-    }
+test('it should set the value at the given offset', function (): void {
+    $byteBuffer = ByteBuffer::new('Hello World');
+    $byteBuffer->__set(1, 'X');
 
-    public function test_it_should_append_the_given_buffer_to_another(): void
-    {
-        $buffer = ByteBuffer::new('Hello');
+    expect($byteBuffer->__get(1))->toBe('X');
+});
 
-        ByteBuffer::new('World')->appendTo($buffer);
+test('it should check if the offset exists', function (): void {
+    $byteBuffer = ByteBuffer::new('Hello World');
 
-        self::assertSame('HelloWorld', $buffer->toUTF8());
-        self::assertSame($buffer->capacity(), $buffer->current()); // offset should be at the end of new buffer
-    }
+    expect($byteBuffer->__isset(1))->toBeTrue();
+});
 
-    public function test_it_should_prepend_the_given_buffer(): void
-    {
-        $buffer = ByteBuffer::new('World');
-        $buffer->prepend(ByteBuffer::new('Hello'));
+test('it should unset the value at the given offset', function (): void {
+    $byteBuffer = ByteBuffer::new('Hello World');
+    $byteBuffer->__unset(1);
 
-        self::assertSame('HelloWorld', $buffer->toUTF8());
-        self::assertSame($buffer->capacity(), $buffer->current()); // offset should be at the end of new buffer
-    }
+    expect($byteBuffer->__isset(1))->toBeFalse();
+});
 
-    public function test_it_should_prepend_the_given_string(): void
-    {
-        $buffer = ByteBuffer::new('World');
-        $buffer->prepend('Hello');
+test('it should initialise from array', function (): void {
+    $byteBuffer = ByteBuffer::new(\mb_str_split('Hello World'));
 
-        self::assertSame('HelloWorld', $buffer->toUTF8());
-        self::assertSame($buffer->capacity(), $buffer->current()); // offset should be at the end of new buffer
-    }
+    expect($byteBuffer)->toBeInstanceOf(ByteBuffer::class);
+    expect($byteBuffer->internalSize())->toBe(11);
+});
 
-    public function test_it_should_prepend_the_given_buffer_to_another(): void
-    {
-        $buffer = ByteBuffer::new('World');
+test('it should initialise from integer', function (): void {
+    $byteBuffer = ByteBuffer::new(11);
 
-        ByteBuffer::new('Hello')->prependTo($buffer);
+    expect($byteBuffer)->toBeInstanceOf(ByteBuffer::class);
+    expect($byteBuffer->internalSize())->toBe(11);
+});
 
-        self::assertSame('HelloWorld', $buffer->toUTF8());
-        self::assertSame($buffer->capacity(), $buffer->current()); // offset should be at the end of new buffer
-    }
+test('it should initialise from string', function (): void {
+    $byteBuffer = ByteBuffer::new('Hello World');
 
-    public function test_it_should_fill_the_buffer_with_the_given_number_of_bytes(): void
-    {
-        $buffer = ByteBuffer::new(1);
-        $buffer->fill(11);
+    expect($byteBuffer)->toBeInstanceOf(ByteBuffer::class);
+    expect($byteBuffer->internalSize())->toBe(11);
+});
 
-        self::assertSame(11, $buffer->internalSize());
-    }
+test('it should throw for invalid type', function (): void {
+    $this->expectException(InvalidArgumentException::class);
 
-    public function test_it_should_fill_the_buffer_starting_from_current_position(): void
-    {
-        $buffer = ByteBuffer::new('hello');
-        $buffer->position(4);
-        $buffer->fill(11);
+    ByteBuffer::new(123.456);
+});
 
-        self::assertSame(4 + 11, $buffer->internalSize());
-    }
+test('it should allocate the given number of bytes', function (): void {
+    $byteBuffer = ByteBuffer::allocate(11);
 
-    public function test_it_should_flip_the_buffer_contents(): void
-    {
-        $buffer = ByteBuffer::new('Hello World');
-        $buffer->flip();
+    expect($byteBuffer)->toBeInstanceOf(ByteBuffer::class);
+    expect($byteBuffer->internalSize())->toBe(11);
+});
 
-        self::assertSame(11, $buffer->internalSize());
-        self::assertSame(0, $buffer->current());
-        self::assertSame('dlroW olleH', $buffer->toUTF8());
-    }
+test('it should fail to allocate the given number of bytes', function (): void {
+    $this->expectException(InvalidArgumentException::class);
 
-    public function test_it_should_set_the_byte_order(): void
-    {
-        $buffer = ByteBuffer::new(1);
-        $buffer->order(0);
+    ByteBuffer::allocate(-1);
+});
 
-        self::assertTrue($buffer->isBigEndian());
-    }
+test('it should initialise the buffer', function (): void {
+    $byteBuffer = ByteBuffer::allocate(11);
+    $byteBuffer->initializeBuffer(11, 'Hello World');
 
-    public function test_it_should_reverse_the_buffer_contents(): void
-    {
-        $buffer = ByteBuffer::new('Hello World');
-        $buffer->reverse();
+    expect($byteBuffer->toUTF8())->toBe('Hello World');
+    expect($byteBuffer->internalSize())->toBe(11);
+});
 
-        self::assertSame('dlroW olleH', $buffer->toUTF8());
-    }
+test('it should pack the given value', function (): void {
+    $byteBuffer = ByteBuffer::allocate(11);
+    $byteBuffer->pack('C', 255, 0);
 
-    public function test_it_should_slice_the_buffer_contents(): void
-    {
-        $buffer = ByteBuffer::new('Hello World');
+    expect(\unpack('C', (string) $byteBuffer->offsetGet(0))[1])->toBe(255);
+});
 
-        self::assertSame(\mb_str_split('Hello'), $buffer->slice(0, 5));
-    }
+test('it should unpack the given value', function (): void {
+    $byteBuffer = ByteBuffer::allocate(11);
+    $byteBuffer->pack('C', 255, 0);
+    $byteBuffer->position(0);
 
-    public function test_it_should_fail_to_slice_the_buffer_contents_if_offset_is_to_big(): void
-    {
-        $this->expectException(\InvalidArgumentException::class);
+    expect($byteBuffer->unpack('C'))->toBe(255);
+});
 
-        ByteBuffer::new('Hello World')->slice(16, 5);
-    }
+test('it should get the value', function (): void {
+    $byteBuffer = ByteBuffer::allocate(11);
+    $byteBuffer->pack('C', 255, 0);
 
-    public function test_it_should_fail_to_slice_the_buffer_contents_if_length_is_to_big(): void
-    {
-        $this->expectException(\InvalidArgumentException::class);
+    expect(\unpack('C', (string) $byteBuffer->get(0))[1])->toBe(255);
+});
 
-        ByteBuffer::new('Hello World')->slice(0, 16);
-    }
+test('it should concat the given buffers', function (): void {
+    $byteBuffer = ByteBuffer::new('Hello');
+    $world = ByteBuffer::new('World');
 
-    public function test_it_should_compare_if_the_buffers_are_equal(): void
-    {
-        $buffer1 = ByteBuffer::allocate(11);
-        $buffer2 = ByteBuffer::allocate(11);
+    $buffer = ByteBuffer::concat($byteBuffer, $world);
 
-        self::assertTrue($buffer1->equals($buffer2));
-    }
+    expect($buffer->toUTF8())->toBe('HelloWorld');
+});
 
-    public function test_it_should_test_if_the_given_value_is_a_byte_buffer(): void
-    {
-        $buffer = ByteBuffer::allocate(11);
+test('it should append the given buffer', function (): void {
+    $byteBuffer = ByteBuffer::new('Hello');
+    $byteBuffer->append(ByteBuffer::new('World'));
 
-        self::assertTrue($buffer->isByteBuffer($buffer));
-    }
+    expect($byteBuffer->toUTF8())->toBe('HelloWorld');
+    expect($byteBuffer->current())->toBe($byteBuffer->capacity());
+    // offset should be at the end of new buffer
+});
 
-    public function test_it_should_test_if_the_buffer_is_big_endian(): void
-    {
-        $buffer = ByteBuffer::allocate(11);
-        $buffer->order(0);
+test('it should append the given string', function (): void {
+    $byteBuffer = ByteBuffer::new('Hello');
+    $byteBuffer->append('World');
 
-        self::assertTrue($buffer->isBigEndian());
-    }
+    expect($byteBuffer->toUTF8())->toBe('HelloWorld');
+    expect($byteBuffer->current())->toBe($byteBuffer->capacity());
+    // offset should be at the end of new buffer
+});
 
-    public function test_it_should_test_if_the_buffer_is_little_endian(): void
-    {
-        $buffer = ByteBuffer::allocate(11);
-        $buffer->order(1);
+test('it should append the given buffer to another', function (): void {
+    $byteBuffer = ByteBuffer::new('Hello');
 
-        self::assertTrue($buffer->isLittleEndian());
-    }
+    ByteBuffer::new('World')->appendTo($byteBuffer);
 
-    public function test_it_should_test_if_the_buffer_is_machine_byte(): void
-    {
-        $buffer = ByteBuffer::allocate(11);
-        $buffer->order(2);
+    expect($byteBuffer->toUTF8())->toBe('HelloWorld');
+    expect($byteBuffer->current())->toBe($byteBuffer->capacity());
+    // offset should be at the end of new buffer
+});
 
-        self::assertTrue($buffer->isMachineByte());
-    }
-}
+test('it should prepend the given buffer', function (): void {
+    $byteBuffer = ByteBuffer::new('World');
+    $byteBuffer->prepend(ByteBuffer::new('Hello'));
+
+    expect($byteBuffer->toUTF8())->toBe('HelloWorld');
+    expect($byteBuffer->current())->toBe($byteBuffer->capacity());
+    // offset should be at the end of new buffer
+});
+
+test('it should prepend the given string', function (): void {
+    $byteBuffer = ByteBuffer::new('World');
+    $byteBuffer->prepend('Hello');
+
+    expect($byteBuffer->toUTF8())->toBe('HelloWorld');
+    expect($byteBuffer->current())->toBe($byteBuffer->capacity());
+    // offset should be at the end of new buffer
+});
+
+test('it should prepend the given buffer to another', function (): void {
+    $byteBuffer = ByteBuffer::new('World');
+
+    ByteBuffer::new('Hello')->prependTo($byteBuffer);
+
+    expect($byteBuffer->toUTF8())->toBe('HelloWorld');
+    expect($byteBuffer->current())->toBe($byteBuffer->capacity());
+    // offset should be at the end of new buffer
+});
+
+test('it should fill the buffer with the given number of bytes', function (): void {
+    $byteBuffer = ByteBuffer::new(1);
+    $byteBuffer->fill(11);
+
+    expect($byteBuffer->internalSize())->toBe(11);
+});
+
+test('it should fill the buffer starting from current position', function (): void {
+    $byteBuffer = ByteBuffer::new('hello');
+    $byteBuffer->position(4);
+    $byteBuffer->fill(11);
+
+    expect($byteBuffer->internalSize())->toBe(4 + 11);
+});
+
+test('it should flip the buffer contents', function (): void {
+    $byteBuffer = ByteBuffer::new('Hello World');
+    $byteBuffer->flip();
+
+    expect($byteBuffer->internalSize())->toBe(11);
+    expect($byteBuffer->current())->toBe(0);
+    expect($byteBuffer->toUTF8())->toBe('dlroW olleH');
+});
+
+test('it should set the byte order', function (): void {
+    $byteBuffer = ByteBuffer::new(1);
+    $byteBuffer->order(0);
+
+    expect($byteBuffer->isBigEndian())->toBeTrue();
+});
+
+test('it should reverse the buffer contents', function (): void {
+    $byteBuffer = ByteBuffer::new('Hello World');
+    $byteBuffer->reverse();
+
+    expect($byteBuffer->toUTF8())->toBe('dlroW olleH');
+});
+
+test('it should slice the buffer contents', function (): void {
+    $byteBuffer = ByteBuffer::new('Hello World');
+
+    expect($byteBuffer->slice(0, 5))->toBe(\mb_str_split('Hello'));
+});
+
+test('it should fail to slice the buffer contents if offset is to big', function (): void {
+    $this->expectException(InvalidArgumentException::class);
+
+    ByteBuffer::new('Hello World')->slice(16, 5);
+});
+
+test('it should fail to slice the buffer contents if length is to big', function (): void {
+    $this->expectException(InvalidArgumentException::class);
+
+    ByteBuffer::new('Hello World')->slice(0, 16);
+});
+
+test('it should compare if the buffers are equal', function (): void {
+    $byteBuffer = ByteBuffer::allocate(11);
+    $buffer2 = ByteBuffer::allocate(11);
+
+    expect($byteBuffer->equals($buffer2))->toBeTrue();
+});
+
+test('it should test if the given value is a byte buffer', function (): void {
+    $byteBuffer = ByteBuffer::allocate(11);
+
+    expect($byteBuffer->isByteBuffer($byteBuffer))->toBeTrue();
+});
+
+test('it should test if the buffer is big endian', function (): void {
+    $byteBuffer = ByteBuffer::allocate(11);
+    $byteBuffer->order(0);
+
+    expect($byteBuffer->isBigEndian())->toBeTrue();
+});
+
+test('it should test if the buffer is little endian', function (): void {
+    $byteBuffer = ByteBuffer::allocate(11);
+    $byteBuffer->order(1);
+
+    expect($byteBuffer->isLittleEndian())->toBeTrue();
+});
+
+test('it should test if the buffer is machine byte', function (): void {
+    $byteBuffer = ByteBuffer::allocate(11);
+    $byteBuffer->order(2);
+
+    expect($byteBuffer->isMachineByte())->toBeTrue();
+});

@@ -7,42 +7,28 @@
  * the LICENSE file that was distributed with this source code.
  */
 
-namespace Tests\Unit\Concerns\Reads;
-
 use BaseCodeOy\ByteBuffer\ByteBuffer;
-use PHPUnit\Framework\TestCase;
 
-/**
- * @internal
- *
- * @coversNothing
- */
-final class FloatsTest extends TestCase
-{
-    public function test_it_should_read_float32(): void
-    {
-        $buffer = ByteBuffer::new(1);
-        $buffer->writeFloat32(8.0);
-        $buffer->position(0);
+test('it should read float32', function (): void {
+    $byteBuffer = ByteBuffer::new(1);
+    $byteBuffer->writeFloat32(8.0);
+    $byteBuffer->position(0);
 
-        self::assertSame(8.0, $buffer->readFloat32());
-    }
+    expect($byteBuffer->readFloat32())->toEqualWithDelta(8.0, \PHP_FLOAT_EPSILON);
+});
 
-    public function test_it_should_read_float64(): void
-    {
-        $buffer = ByteBuffer::new(1);
-        $buffer->writeFloat64(8.0);
-        $buffer->position(0);
+test('it should read float64', function (): void {
+    $byteBuffer = ByteBuffer::new(1);
+    $byteBuffer->writeFloat64(8.0);
+    $byteBuffer->position(0);
 
-        self::assertSame(8.0, $buffer->readFloat64());
-    }
+    expect($byteBuffer->readFloat64())->toEqualWithDelta(8.0, \PHP_FLOAT_EPSILON);
+});
 
-    public function test_it_should_read_double(): void
-    {
-        $buffer = ByteBuffer::new(1);
-        $buffer->writeDouble(8.0);
-        $buffer->position(0);
+test('it should read double', function (): void {
+    $byteBuffer = ByteBuffer::new(1);
+    $byteBuffer->writeDouble(8.0);
+    $byteBuffer->position(0);
 
-        self::assertSame(8.0, $buffer->readDouble());
-    }
-}
+    expect($byteBuffer->readDouble())->toEqualWithDelta(8.0, \PHP_FLOAT_EPSILON);
+});

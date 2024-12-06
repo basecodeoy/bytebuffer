@@ -7,52 +7,34 @@
  * the LICENSE file that was distributed with this source code.
  */
 
-namespace Tests\Unit;
-
 use BaseCodeOy\ByteBuffer\LengthMap;
-use PHPUnit\Framework\TestCase;
 
-/**
- * @internal
- *
- * @coversNothing
- */
-final class LengthMapTest extends TestCase
-{
-    public function test_it_should_get_the_length_for_string(): void
-    {
-        self::assertSame(33, LengthMap::get('a33'));
-    }
+test('it should get the length for string', function (): void {
+    expect(LengthMap::get('a33'))->toBe(33);
+});
 
-    public function test_it_should_get_the_length_for_float(): void
-    {
-        self::assertSame(33, LengthMap::get('f33'));
-    }
+test('it should get the length for float', function (): void {
+    expect(LengthMap::get('f33'))->toBe(33);
+});
 
-    public function test_it_should_get_the_length_for_double(): void
-    {
-        self::assertSame(33, LengthMap::get('d33'));
-    }
+test('it should get the length for double', function (): void {
+    expect(LengthMap::get('d33'))->toBe(33);
+});
 
-    public function test_it_should_get_the_length_for_hex_with_low_nibble(): void
-    {
-        self::assertSame(33, LengthMap::get('h66'));
-    }
+test('it should get the length for hex with low nibble', function (): void {
+    expect(LengthMap::get('h66'))->toBe(33);
+});
 
-    public function test_it_should_get_the_length_for_hex_with_high_nibble(): void
-    {
-        self::assertSame(33, LengthMap::get('H66'));
-    }
+test('it should get the length for hex with high nibble', function (): void {
+    expect(LengthMap::get('H66'))->toBe(33);
+});
 
-    public function test_it_should_get_the_length_from_the_array(): void
-    {
-        self::assertSame(1, LengthMap::get('C'));
-    }
+test('it should get the length from the array', function (): void {
+    expect(LengthMap::get('C'))->toBe(1);
+});
 
-    public function test_it_should_throw_for_invalid_type(): void
-    {
-        $this->expectException(\InvalidArgumentException::class);
+test('it should throw for invalid type', function (): void {
+    $this->expectException(InvalidArgumentException::class);
 
-        LengthMap::get('_INVALID_');
-    }
-}
+    LengthMap::get('_INVALID_');
+});

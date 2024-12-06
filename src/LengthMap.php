@@ -16,7 +16,7 @@ final class LengthMap
      *
      * @var array
      */
-    public const LENGTHS = [
+    public const array LENGTHS = [
         // Chars (8 bit)
         'c' => 1,
         'C' => 1,
@@ -70,7 +70,7 @@ final class LengthMap
         }
 
         if (!\array_key_exists($format, self::LENGTHS)) {
-            throw new \InvalidArgumentException("The given format [{$format}] is not supported.");
+            throw new \InvalidArgumentException(\sprintf('The given format [%s] is not supported.', $format));
         }
 
         return self::LENGTHS[$format];

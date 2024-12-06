@@ -60,21 +60,12 @@ trait Initialisable
      */
     public static function fromString(string $value, string $encoding): self
     {
-        switch ($encoding) {
-            case 'binary':
-                return static::fromBinary($value);
-
-            case 'hex':
-                return static::fromHex($value);
-
-            case 'utf8':
-                return static::fromUTF8($value);
-
-            case 'base64':
-                return static::fromBase64($value);
-
-            default:
-                throw new \InvalidArgumentException("The encoding [{$encoding}] is not supported.");
-        }
+        return match ($encoding) {
+            'binary' => static::fromBinary($value),
+            'hex' => static::fromHex($value),
+            'utf8' => static::fromUTF8($value),
+            'base64' => static::fromBase64($value),
+            default => throw new \InvalidArgumentException(\sprintf('The encoding [%s] is not supported.', $encoding)),
+        };
     }
 }

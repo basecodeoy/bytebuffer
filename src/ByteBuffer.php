@@ -42,86 +42,58 @@ final class ByteBuffer
 
     /**
      * Whether to use big endian, little endian or machine byte order.
-     *
-     * @var int
      */
-    private $order = 1;
+    private int $order = 1;
 
     /**
      * Constructs a new ByteBuffer.
-     *
-     * @param mixed $value
      */
-    private function __construct($value)
+    private function __construct(mixed $value)
     {
-        switch (\gettype($value)) {
-            case 'array':
-                $this->initializeBuffer(\count($value), $value);
-
-                break;
-
-            case 'integer':
-                $this->initializeBuffer($value, \pack("x{$value}"));
-
-                break;
-
-            case 'string':
-                $this->initializeBuffer(\mb_strlen($value), $value);
-
-                break;
-
-            default:
-                throw new \InvalidArgumentException('Constructor argument must be a binary string or integer.');
-        }
+        match (\gettype($value)) {
+            'array' => $this->initializeBuffer(\count($value), $value),
+            'integer' => $this->initializeBuffer($value, \pack('x'.$value)),
+            'string' => $this->initializeBuffer(\mb_strlen($value), $value),
+            default => throw new \InvalidArgumentException('Constructor argument must be a binary string or integer.'),
+        };
     }
 
     /**
      * Dynamically retrieve a value from the buffer.
-     *
-     * @param mixed $offset
      */
-    public function __get($offset)
+    public function __get(mixed $offset)
     {
         return $this->offsetGet($offset);
     }
 
     /**
      * Dynamically set a value in the buffer.
-     *
-     * @param mixed $offset
-     * @param mixed $value
      */
-    public function __set($offset, $value): void
+    public function __set(mixed $offset, mixed $value): void
     {
         $this->offsetSet($offset, $value);
     }
 
     /**
      * Dynamically check if a value in the buffer is set.
-     *
-     * @param mixed $offset
      */
-    public function __isset($offset)
+    public function __isset(mixed $offset)
     {
         return $this->offsetExists($offset);
     }
 
     /**
      * Dynamically unset a value in the buffer.
-     *
-     * @param mixed $offset
      */
-    public function __unset($offset): void
+    public function __unset(mixed $offset): void
     {
         $this->offsetUnset($offset);
     }
 
     /**
      * Allocates a new ByteBuffer backed by a buffer with the specified data.
-     *
-     * @param mixed $value
      */
-    public static function new($value): self
+    public static function new(mixed $value): self
     {
         return new self($value);
     }
@@ -154,22 +126,18 @@ final class ByteBuffer
 
     /**
      * Determine if the given value is a ByteBuffer.
-     *
-     * @param mixed $value
      */
-    public static function isByteBuffer($value): bool
+    public static function isByteBuffer(mixed $value): bool
     {
         return $value instanceof self;
     }
 
     /**
      * Initialise a new buffer from the given content.
-     *
-     * @param mixed $content
      */
-    public function initializeBuffer(int $length, $content): void
+    public function initializeBuffer(int $length, mixed $content): void
     {
-        for ($i = 0; $i < $length; $i++) {
+        for ($i = 0; $i < $length; ++$i) {
             $this->buffer[$i] = $content[$i];
         }
 
@@ -178,16 +146,14 @@ final class ByteBuffer
 
     /**
      * Pack data into a binary string.
-     *
-     * @param mixed $value
      */
-    public function pack(string $format, $value, int $offset): self
+    public function pack(string $format, mixed $value, int $offset): self
     {
         $this->skip($offset);
 
         $bytes = \pack($format, $value);
 
-        for ($i = 0; $i < \mb_strlen($bytes); $i++) {
+        for ($i = 0; $i < \mb_strlen($bytes); ++$i) {
             $this->buffer[$this->offset++] = $bytes[$i];
         }
 
@@ -218,10 +184,8 @@ final class ByteBuffer
 
     /**
      * Appends some data to this ByteBuffer.
-     *
-     * @param mixed $value
      */
-    public function append($value, int $offset = 0): self
+    public function append(mixed $value, int $offset = 0): self
     {
         if ($value instanceof self) {
             $value = $value->toArray($offset);
@@ -243,17 +207,15 @@ final class ByteBuffer
     /**
      * Appends this ByteBuffers contents to another ByteBuffer.
      */
-    public function appendTo(self $buffer, int $offset = 0): self
+    public function appendTo(self $buffer): self
     {
         return $buffer->append($this);
     }
 
     /**
      * Prepends some data to this ByteBuffer.
-     *
-     * @param mixed $value
      */
-    public function prepend($value, int $offset = 0): self
+    public function prepend(mixed $value, int $offset = 0): self
     {
         if ($value instanceof self) {
             $value = $value->toArray($offset);
@@ -293,7 +255,7 @@ final class ByteBuffer
             $this->position($start);
         }
 
-        for ($i = 0; $i < $length; $i++) {
+        for ($i = 0; $i < $length; ++$i) {
             $this->buffer[$this->offset++] = \pack('x');
         }
 

@@ -18,6 +18,6 @@ trait Hex
     {
         $length = \mb_strlen($value);
 
-        return $this->pack("H{$length}", $value, $offset);
+        return $this->pack('H'.$length, $value, $offset);
     }
 }

@@ -7,39 +7,25 @@
  * the LICENSE file that was distributed with this source code.
  */
 
-namespace Tests\Unit\Concerns\Writes;
-
 use BaseCodeOy\ByteBuffer\ByteBuffer;
-use PHPUnit\Framework\TestCase;
 
-/**
- * @internal
- *
- * @coversNothing
- */
-final class FloatsTest extends TestCase
-{
-    public function test_it_should_write_float32(): void
-    {
-        $buffer = ByteBuffer::new(1);
-        $buffer->writeFloat32(8.0);
+test('it should write float32', function (): void {
+    $byteBuffer = ByteBuffer::new(1);
+    $byteBuffer->writeFloat32(8.0);
 
-        self::assertSame(4, $buffer->internalSize());
-    }
+    expect($byteBuffer->internalSize())->toBe(4);
+});
 
-    public function test_it_should_write_float64(): void
-    {
-        $buffer = ByteBuffer::new(1);
-        $buffer->writeFloat64(8.0);
+test('it should write float64', function (): void {
+    $byteBuffer = ByteBuffer::new(1);
+    $byteBuffer->writeFloat64(8.0);
 
-        self::assertSame(8, $buffer->internalSize());
-    }
+    expect($byteBuffer->internalSize())->toBe(8);
+});
 
-    public function test_it_should_write_double(): void
-    {
-        $buffer = ByteBuffer::new(1);
-        $buffer->writeDouble(8.0);
+test('it should write double', function (): void {
+    $byteBuffer = ByteBuffer::new(1);
+    $byteBuffer->writeDouble(8.0);
 
-        self::assertSame(8, $buffer->internalSize());
-    }
-}
+    expect($byteBuffer->internalSize())->toBe(8);
+});

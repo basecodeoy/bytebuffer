@@ -7,66 +7,49 @@
  * the LICENSE file that was distributed with this source code.
  */
 
-namespace Tests\Unit\Concerns\Writes;
-
 use BaseCodeOy\ByteBuffer\ByteBuffer;
-use PHPUnit\Framework\TestCase;
 
-/**
- * @internal
- *
- * @coversNothing
- */
-final class StringsTest extends TestCase
-{
-    public function test_it_should_write_bytes(): void
-    {
-        $buffer = ByteBuffer::new(0);
-        $buffer->writeBytes('Hello World');
+test('it should write bytes', function (): void {
+    $byteBuffer = ByteBuffer::new(0);
+    $byteBuffer->writeBytes('Hello World');
 
-        self::assertSame(11, $buffer->internalSize());
-    }
+    expect($byteBuffer->internalSize())->toBe(11);
+});
 
-    public function test_it_should_write_string(): void
-    {
-        $buffer = ByteBuffer::new(1);
-        $buffer->writeString('Hello World');
+test('it should write string', function (): void {
+    $byteBuffer = ByteBuffer::new(1);
+    $byteBuffer->writeString('Hello World');
 
-        self::assertSame(11, $buffer->internalSize());
-    }
+    expect($byteBuffer->internalSize())->toBe(11);
+});
 
-    public function test_it_should_write_utf8_string(): void
-    {
-        $buffer = ByteBuffer::new(1);
-        $buffer->writeUTF8String('Hello World 😄');
+test('it should write utf8 string', function (): void {
+    $byteBuffer = ByteBuffer::new(1);
+    $byteBuffer->writeUTF8String('Hello World 😄');
 
-        self::assertSame(20, $buffer->internalSize());
-    }
+    expect($byteBuffer->internalSize())->toBe(20);
+});
 
-    public function test_it_should_write_c_string(): void
-    {
-        $buffer = ByteBuffer::new(1);
-        $buffer->writeCString('Hello World');
+test('it should write c string', function (): void {
+    $byteBuffer = ByteBuffer::new(1);
+    $byteBuffer->writeCString('Hello World');
 
-        self::assertSame(12, $buffer->internalSize());
-        self::assertSame('48656c6c6f20576f726c6400', $buffer->toHex());
-    }
+    expect($byteBuffer->internalSize())->toBe(12);
+    expect($byteBuffer->toHex())->toBe('48656c6c6f20576f726c6400');
+});
 
-    public function test_it_should_write_i_string(): void
-    {
-        $buffer = ByteBuffer::new(1);
-        $buffer->writeIString('Hello World');
+test('it should write i string', function (): void {
+    $byteBuffer = ByteBuffer::new(1);
+    $byteBuffer->writeIString('Hello World');
 
-        self::assertSame(15, $buffer->internalSize());
-        self::assertSame('0000000b48656c6c6f20576f726c64', $buffer->toHex());
-    }
+    expect($byteBuffer->internalSize())->toBe(15);
+    expect($byteBuffer->toHex())->toBe('0000000b48656c6c6f20576f726c64');
+});
 
-    public function test_it_should_write_v_string(): void
-    {
-        $buffer = ByteBuffer::new(1);
-        $buffer->writeVString('Hello World');
+test('it should write v string', function (): void {
+    $byteBuffer = ByteBuffer::new(1);
+    $byteBuffer->writeVString('Hello World');
 
-        self::assertSame(12, $buffer->internalSize());
-        self::assertSame('0b48656c6c6f20576f726c64', $buffer->toHex());
-    }
-}
+    expect($byteBuffer->internalSize())->toBe(12);
+    expect($byteBuffer->toHex())->toBe('0b48656c6c6f20576f726c64');
+});

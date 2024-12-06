@@ -7,45 +7,30 @@
  * the LICENSE file that was distributed with this source code.
  */
 
-namespace Tests\Unit\Concerns\Reads;
-
 use BaseCodeOy\ByteBuffer\ByteBuffer;
-use PHPUnit\Framework\TestCase;
 
-/**
- * @internal
- *
- * @coversNothing
- */
-final class OffsetableTest extends TestCase
-{
-    public function test_it_should_get_the_value_at_the_given_offset(): void
-    {
-        $buffer = ByteBuffer::new('Hello World');
+test('it should get the value at the given offset', function (): void {
+    $byteBuffer = ByteBuffer::new('Hello World');
 
-        self::assertSame('e', $buffer->offsetGet(1));
-    }
+    expect($byteBuffer->offsetGet(1))->toBe('e');
+});
 
-    public function test_it_should_set_the_value_at_the_given_offset(): void
-    {
-        $buffer = ByteBuffer::new('Hello World');
-        $buffer->offsetSet(1, 'X');
+test('it should set the value at the given offset', function (): void {
+    $byteBuffer = ByteBuffer::new('Hello World');
+    $byteBuffer->offsetSet(1, 'X');
 
-        self::assertSame('X', $buffer->offsetGet(1));
-    }
+    expect($byteBuffer->offsetGet(1))->toBe('X');
+});
 
-    public function test_it_should_check_if_the_offset_exists(): void
-    {
-        $buffer = ByteBuffer::new('Hello World');
+test('it should check if the offset exists', function (): void {
+    $byteBuffer = ByteBuffer::new('Hello World');
 
-        self::assertTrue($buffer->offsetExists(1));
-    }
+    expect($byteBuffer->offsetExists(1))->toBeTrue();
+});
 
-    public function test_it_should_unset_the_value_at_the_given_offset(): void
-    {
-        $buffer = ByteBuffer::new('Hello World');
-        $buffer->offsetUnset(1);
+test('it should unset the value at the given offset', function (): void {
+    $byteBuffer = ByteBuffer::new('Hello World');
+    $byteBuffer->offsetUnset(1);
 
-        self::assertFalse($buffer->offsetExists(1));
-    }
-}
+    expect($byteBuffer->offsetExists(1))->toBeFalse();
+});

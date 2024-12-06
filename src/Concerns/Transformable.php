@@ -80,21 +80,12 @@ trait Transformable
      */
     public function toString(string $encoding, int $offset = 0, int $length = 0): string
     {
-        switch ($encoding) {
-            case 'binary':
-                return $this->toBinary($offset, $length);
-
-            case 'hex':
-                return $this->toHex($offset, $length);
-
-            case 'base64':
-                return $this->toBase64($offset, $length);
-
-            case 'utf8':
-                return $this->toUTF8($offset, $length);
-
-            default:
-                throw new \InvalidArgumentException("The encoding [{$encoding}] is not supported.");
-        }
+        return match ($encoding) {
+            'binary' => $this->toBinary($offset, $length),
+            'hex' => $this->toHex($offset, $length),
+            'base64' => $this->toBase64($offset, $length),
+            'utf8' => $this->toUTF8($offset, $length),
+            default => throw new \InvalidArgumentException(\sprintf('The encoding [%s] is not supported.', $encoding)),
+        };
     }
 }

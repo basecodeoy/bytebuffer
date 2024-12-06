@@ -7,87 +7,68 @@
  * the LICENSE file that was distributed with this source code.
  */
 
-namespace Tests\Unit\Concerns\Reads;
-
 use BaseCodeOy\ByteBuffer\ByteBuffer;
-use PHPUnit\Framework\TestCase;
 
-/**
- * @internal
- *
- * @coversNothing
- */
-final class IntegerTest extends TestCase
-{
-    public function test_it_should_read_int8(): void
-    {
-        $buffer = ByteBuffer::new(1);
-        $buffer->writeInt8(8);
-        $buffer->position(0);
+test('it should read int8', function (): void {
+    $byteBuffer = ByteBuffer::new(1);
+    $byteBuffer->writeInt8(8);
+    $byteBuffer->position(0);
 
-        self::assertSame(8, $buffer->readInt8());
-    }
+    expect($byteBuffer->readInt8())->toBe(8);
+});
 
-    public function test_it_should_read_int16(): void
-    {
-        $buffer = ByteBuffer::new(1);
-        $buffer->writeInt16(16);
-        $buffer->position(0);
+test('it should read int16', function (): void {
+    $byteBuffer = ByteBuffer::new(1);
+    $byteBuffer->writeInt16(16);
+    $byteBuffer->position(0);
 
-        self::assertSame(16, $buffer->readInt16());
-    }
+    expect($byteBuffer->readInt16())->toBe(16);
+});
 
-    public function test_it_should_read_int32(): void
-    {
-        $buffer = ByteBuffer::new(1);
-        $buffer->writeInt32(32);
-        $buffer->position(0);
+test('it should read int32', function (): void {
+    $byteBuffer = ByteBuffer::new(1);
+    $byteBuffer->writeInt32(32);
+    $byteBuffer->position(0);
 
-        self::assertSame(32, $buffer->readInt32());
-    }
+    expect($byteBuffer->readInt32())->toBe(32);
+});
 
-    public function test_it_should_read_int64(): void
-    {
-        $buffer = ByteBuffer::new(1);
-        $buffer->writeInt64(64);
-        $buffer->position(0);
+test('it should read int64', function (): void {
+    $byteBuffer = ByteBuffer::new(1);
+    $byteBuffer->writeInt64(64);
+    $byteBuffer->position(0);
 
-        self::assertSame(64, $buffer->readInt64());
-    }
+    expect($byteBuffer->readInt64())->toBe(64);
+});
 
-    public function test_it_should_read_byte(): void
-    {
-        $buffer = ByteBuffer::new(1);
-        $buffer->writeByte(8);
-        $buffer->position(0);
+test('it should read byte', function (): void {
+    $byteBuffer = ByteBuffer::new(1);
+    $byteBuffer->writeByte(8);
+    $byteBuffer->position(0);
 
-        self::assertSame(8, $buffer->readByte());
-    }
+    expect($byteBuffer->readByte())->toBe(8);
+});
 
-    public function test_it_should_read_short(): void
-    {
-        $buffer = ByteBuffer::new(1);
-        $buffer->writeShort(16);
-        $buffer->position(0);
+test('it should read short', function (): void {
+    $byteBuffer = ByteBuffer::new(1);
+    $byteBuffer->writeShort(16);
+    $byteBuffer->position(0);
 
-        self::assertSame(16, $buffer->readShort());
-    }
+    expect($byteBuffer->readShort())->toBe(16);
+});
 
-    public function test_it_should_read_int(): void
-    {
-        $buffer = ByteBuffer::new(1);
-        $buffer->writeInt(32);
-        $buffer->position(0);
+test('it should read int', function (): void {
+    $byteBuffer = ByteBuffer::new(1);
+    $byteBuffer->writeInt(32);
+    $byteBuffer->position(0);
 
-        self::assertSame(32, $buffer->readInt());
-    }
+    expect($byteBuffer->readInt())->toBe(32);
+});
 
-    public function test_it_should_read_long(): void
-    {
-        $buffer = ByteBuffer::new(1);
-        $buffer->writeLong(64);
-        $buffer->position(0);
+test('it should read long', function (): void {
+    $byteBuffer = ByteBuffer::new(1);
+    $byteBuffer->writeLong(64);
+    $byteBuffer->position(0);
 
-        self::assertSame(64, $buffer->readLong());
-    }
-}
+    expect($byteBuffer->readLong())->toBe(64);
+});

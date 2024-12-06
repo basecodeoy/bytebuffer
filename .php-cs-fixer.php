@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use BaseCodeOy\Standards\ConfigurationFactory;
 use BaseCodeOy\Standards\Presets\Standard;
 

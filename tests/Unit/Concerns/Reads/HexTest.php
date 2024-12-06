@@ -7,35 +7,22 @@
  * the LICENSE file that was distributed with this source code.
  */
 
-namespace Tests\Unit\Concerns\Reads;
-
 use BaseCodeOy\ByteBuffer\ByteBuffer;
-use PHPUnit\Framework\TestCase;
 
-/**
- * @internal
- *
- * @coversNothing
- */
-final class HexTest extends TestCase
-{
-    public function test_it_should_read_hex(): void
-    {
-        $buffer = ByteBuffer::new(0);
-        $buffer->writeHex('48656c6c6f20576f726c64');
-        $buffer->position(0);
+test('it should read hex', function (): void {
+    $byteBuffer = ByteBuffer::new(0);
+    $byteBuffer->writeHex('48656c6c6f20576f726c64');
+    $byteBuffer->position(0);
 
-        self::assertSame(11, $buffer->internalSize());
-        self::assertSame('48656c6c6f20576f726c64', $buffer->readHex(22));
-    }
+    expect($byteBuffer->internalSize())->toBe(11);
+    expect($byteBuffer->readHex(22))->toBe('48656c6c6f20576f726c64');
+});
 
-    public function test_it_should_read_hex_as_string(): void
-    {
-        $buffer = ByteBuffer::new(0);
-        $buffer->writeHex('48656c6c6f20576f726c64');
-        $buffer->position(0);
+test('it should read hex as string', function (): void {
+    $byteBuffer = ByteBuffer::new(0);
+    $byteBuffer->writeHex('48656c6c6f20576f726c64');
+    $byteBuffer->position(0);
 
-        self::assertSame(11, $buffer->internalSize());
-        self::assertSame('Hello World', $buffer->readHexString(22));
-    }
-}
+    expect($byteBuffer->internalSize())->toBe(11);
+    expect($byteBuffer->readHexString(22))->toBe('Hello World');
+});

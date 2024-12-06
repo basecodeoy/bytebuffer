@@ -14,15 +14,15 @@ final class ByteOrder
     /**
      * Most significant value in the sequence is stored first. Flip no bytes!
      */
-    public const BE = 0;
+    public const int BE = 0;
 
     /**
      * Least significant value in the sequence is stored first. Flip bytes!
      */
-    public const LE = 1;
+    public const int LE = 1;
 
     /**
      * Let the current machine determine the endianess.
      */
-    public const MB = 2;
+    public const int MB = 2;
 }

@@ -35,7 +35,7 @@ trait Strings
         $value = \mb_convert_encoding($value, 'UTF-8', 'ISO-8859-1');
         $length = \mb_strlen($value);
 
-        return $this->pack("a{$length}", $value, $offset);
+        return $this->pack('a'.$length, $value, $offset);
     }
 
     /**
@@ -46,7 +46,7 @@ trait Strings
         $value = \mb_convert_encoding($value.' ', 'UTF-8', 'ISO-8859-1');
         $length = \mb_strlen($value);
 
-        return $this->pack("Z{$length}", $value, $offset);
+        return $this->pack('Z'.$length, $value, $offset);
     }
 
     /**

@@ -14,17 +14,15 @@ trait Offsetable
     /**
      * Get the value for a given offset.
      */
-    public function offsetGet(int $offset)
+    public function offsetGet(mixed $offset)
     {
         return $this->buffer[$offset];
     }
 
     /**
      * Set the value at the given offset.
-     *
-     * @param mixed $value
      */
-    public function offsetSet(int $offset, $value): void
+    public function offsetSet(mixed $offset, mixed $value): void
     {
         $this->buffer[$offset] = $value;
     }
@@ -32,7 +30,7 @@ trait Offsetable
     /**
      * Determine if the given offset exists.
      */
-    public function offsetExists(int $offset): bool
+    public function offsetExists(mixed $offset): bool
     {
         return \array_key_exists($offset, $this->buffer);
     }
@@ -40,7 +38,7 @@ trait Offsetable
     /**
      * Unset the value at the given offset.
      */
-    public function offsetUnset(int $offset): void
+    public function offsetUnset(mixed $offset): void
     {
         unset($this->buffer[$offset]);
     }

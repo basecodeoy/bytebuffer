@@ -2,6 +2,7 @@
     "name": "basecodeoy/bytebuffer",
     "description": "A package to easily work with ByteBuffer in PHP.",
     "license": "MIT",
+    "type": "library",
     "keywords": [
         "BaseCode Oy",
         "laravel",
@@ -15,16 +16,20 @@
         }
     ],
     "homepage": "https://github.com/basecodeoy/bytebuffer",
+    "support": {
+        "issues": "https://github.com/basecodeoy/bytebuffer/issues",
+        "source": "https://github.com/basecodeoy/bytebuffer",
+        "security": "https://github.com/basecodeoy/bytebuffer/blob/main/.github/SECURITY.md"
+    },
     "require": {
         "php": "^8.3",
-        "basecodeoy/laravel-package-powerpack": "^1.0.0",
+        "basecodeoy/crate": "^1.0.0",
         "illuminate/contracts": "^11.0"
     },
     "require-dev": {
-        "basecodeoy/standards": "^1.0.5"
+        "basecodeoy/standards": "^1.1.1",
+        "pestphp/pest-plugin-drift": "^3.0"
     },
-    "minimum-stability": "dev",
-    "prefer-stable": true,
     "autoload": {
         "psr-4": {
             "BaseCodeOy\\ByteBuffer\\": "src"
@@ -41,13 +46,10 @@
             "pestphp/pest-plugin": true,
             "phpstan/extension-installer": true
         },
+        "audit": {
+            "abandoned": "report"
+        },
+        "preferred-install": "dist",
         "sort-packages": true
-    },
-    "scripts": {
-        "post-autoload-dump": "@php ./vendor/bin/testbench package:discover --ansi",
-        "analyse": "vendor/bin/phpstan analyse",
-        "format": "vendor/bin/php-cs-fixer fix",
-        "test": "vendor/bin/pest",
-        "test-coverage": "vendor/bin/pest --coverage"
     }
 }

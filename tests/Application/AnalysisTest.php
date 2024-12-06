@@ -9,7 +9,7 @@
 
 namespace Tests\Application;
 
-use BaseCodeOy\PackagePowerPack\TestBench\AbstractAnalysisTestCase;
+use BaseCodeOy\Crate\TestBench\AbstractAnalysisTestCase;
 
 /**
  * @internal
